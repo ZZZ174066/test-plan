@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tsj.Mapper.DeclareInformationMapper">
+
+    <resultMap id="BaseDeclareInformation" type="com.tsj.project.DeclareInformation">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <!-- 思想政治类课程 -->
+        <result property="思想道德与法治" column="思想道德与法治" jdbcType="VARCHAR"/>
+        <result property="中国近现代史纲要" column="中国近现代史纲要" jdbcType="VARCHAR"/>
+        <result property="马克思主义基本原理" column="马克思主义基本原理" jdbcType="VARCHAR"/>
+        <result property="毛泽东思想和中国特色社会主义理论体系概论" column="毛泽东思想和中国特色社会主义理论体系概论" jdbcType="VARCHAR"/>
+        <result property="习近平新时代中国特色社会主义思想概论" column="习近平新时代中国特色社会主义思想概论" jdbcType="VARCHAR"/>
+        <result property="形势与政策Ⅰ" column="形势与政策Ⅰ" jdbcType="VARCHAR"/>
+        <result property="形势与政策Ⅱ" column="形势与政策Ⅱ" jdbcType="VARCHAR"/>
+        <result property="形势与政策Ⅲ" column="形势与政策Ⅲ" jdbcType="VARCHAR"/>
+        <result property="形势与政策Ⅳ" column="形势与政策Ⅳ" jdbcType="VARCHAR"/>
+        <result property="形势与政策V" column="形势与政策V" jdbcType="VARCHAR"/>
+        <result property="形势与政策VⅠ" column="形势与政策VⅠ" jdbcType="VARCHAR"/>
+        <result property="形势与政策VⅡ" column="形势与政策VⅡ" jdbcType="VARCHAR"/>
+        <result property="形势与政策VⅢ" column="形势与政策VⅢ" jdbcType="VARCHAR"/>
+        <!-- 核心通识课程 -->
+        <result property="智能加交通" column="智能加交通" jdbcType="VARCHAR"/>
+        <result property="区块链技术及应用" column="区块链技术及应用" jdbcType="VARCHAR"/>
+        <result property="现代铁路信息技术" column="现代铁路信息技术" jdbcType="VARCHAR"/>
+        <!-- 军事类课程 -->
+        <result property="军事理论" column="军事理论" jdbcType="VARCHAR"/>
+        <result property="军事技能" column="军事技能" jdbcType="VARCHAR"/>
+        <!-- 体育类课程 -->
+        <result property="体育Ⅰ" column="体育Ⅰ" jdbcType="VARCHAR"/>
+        <result property="体育Ⅱ" column="体育Ⅱ" jdbcType="VARCHAR"/>
+        <result property="体育Ⅲ" column="体育Ⅲ" jdbcType="VARCHAR"/>
+        <result property="体育Ⅳ" column="体育Ⅳ" jdbcType="VARCHAR"/>
+        <result property="体育健康课程Ⅰ" column="体育健康课程Ⅰ" jdbcType="VARCHAR"/>
+        <result property="体育健康课程Ⅱ" column="体育健康课程Ⅱ" jdbcType="VARCHAR"/>
+        <!-- 外语类课程 -->
+        <result property="英语Ⅰ" column="英语Ⅰ" jdbcType="VARCHAR"/>
+        <result property="英语Ⅱ" column="英语Ⅱ" jdbcType="VARCHAR"/>
+        <result property="通用学术英语" column="通用学术英语" jdbcType="VARCHAR"/>
+        <result property="职场英语" column="职场英语" jdbcType="VARCHAR"/>
+        <result property="交际与文化视听说" column="交际与文化视听说" jdbcType="VARCHAR"/>
+        <result property="语言文化与翻译" column="语言文化与翻译" jdbcType="VARCHAR"/>
+        <result property="英语公共演讲" column="英语公共演讲" jdbcType="VARCHAR"/>
+        <!-- 新生研讨课 -->
+        <result property="计算机学科前沿导论" column="计算机学科前沿导论" jdbcType="VARCHAR"/>
+        <result property="软件学科前沿导论" column="软件学科前沿导论" jdbcType="VARCHAR"/>
+        <!-- 数学与自然科学 -->
+        <result property="高等数学Ⅰ" column="高等数学Ⅰ" jdbcType="VARCHAR"/>
+        <result property="高等数学Ⅱ" column="高等数学Ⅱ" jdbcType="VARCHAR"/>
+        <result property="线性代数B" column="线性代数B" jdbcType="VARCHAR"/>
+        <result property="概率论与数理统计" column="概率论与数理统计" jdbcType="VARCHAR"/>
+        <result property="离散数学" column="离散数学" jdbcType="VARCHAR"/>
+        <result property="大学物理BⅠ" column="大学物理BⅠ" jdbcType="VARCHAR"/>
+        <result property="大学物理BⅡ" column="大学物理BⅡ" jdbcType="VARCHAR"/>
+        <result property="大学物理实验Ⅰ" column="大学物理实验Ⅰ" jdbcType="VARCHAR"/>
+        <result property="大学物理实验Ⅱ" column="大学物理实验Ⅱ" jdbcType="VARCHAR"/>
+        <!-- 专业基础课 -->
+        <result property="高级语言程序设计" column="高级语言程序设计" jdbcType="VARCHAR"/>
+        <result property="面向对象程序设计" column="面向对象程序设计" jdbcType="VARCHAR"/>
+        <result property="数字电子技术B" column="数字电子技术B" jdbcType="VARCHAR"/>
+        <result property="数字电子技术实验" column="数字电子技术实验" jdbcType="VARCHAR"/>
+        <result property="数据结构A" column="数据结构A" jdbcType="VARCHAR"/>
+        <result property="数据结构实验" column="数据结构实验" jdbcType="VARCHAR"/>
+        <result property="计算机组成原理B" column="计算机组成原理B" jdbcType="VARCHAR"/>
+        <result property="计算机组成实验" column="计算机组成实验" jdbcType="VARCHAR"/>
+        <!-- 专业核心课程 -->
+        <result property="算法分析与设计B" column="算法分析与设计B" jdbcType="VARCHAR"/>
+        <result property="算法分析与设计实验" column="算法分析与设计实验" jdbcType="VARCHAR"/>
+        <result property="数据库原理" column="数据库原理" jdbcType="VARCHAR"/>
+        <result property="数据库原理实验" column="数据库原理实验" jdbcType="VARCHAR"/>
+        <result property="操作系统" column="操作系统" jdbcType="VARCHAR"/>
+        <result property="操作系统实验" column="操作系统实验" jdbcType="VARCHAR"/>
+        <result property="软件工程" column="软件工程" jdbcType="VARCHAR"/>
+        <result property="计算机网络" column="计算机网络" jdbcType="VARCHAR"/>
+        <result property="计算机网络工程实验" column="计算机网络工程实验" jdbcType="VARCHAR"/>
+        <!-- 专业限修课程 -->
+        <result property="软件系统分析与设计" column="软件系统分析与设计" jdbcType="VARCHAR"/>
+        <result property="编译原理" column="编译原理" jdbcType="VARCHAR"/>
+        <result property="人机交互技术" column="人机交互技术" jdbcType="VARCHAR"/>
+        <result property="人机交互技术实验" column="人机交互技术实验" jdbcType="VARCHAR"/>
+        <result property="新技术讲座" column="新技术讲座" jdbcType="VARCHAR"/>
+        <result property="软件项目管理" column="软件项目管理" jdbcType="VARCHAR"/>
+        <result property="计算机图形学" column="计算机图形学" jdbcType="VARCHAR"/>
+        <result property="计算机图形学实验" column="计算机图形学实验" jdbcType="VARCHAR"/>
+        <result property="软件质量保证与测试" column="软件质量保证与测试" jdbcType="VARCHAR"/>
+        <result property="软件综合课程设计" column="软件综合课程设计" jdbcType="VARCHAR"/>
+        <!-- 跨学科课程 -->
+        <result property="Java开发技术" column="Java开发技术" jdbcType="VARCHAR"/>
+        <result property="Linux内核分析" column="Linux内核分析" jdbcType="VARCHAR"/>
+        <result property="软件设计模式" column="软件设计模式" jdbcType="VARCHAR"/>
+        <result property="软件设计模式实验" column="软件设计模式实验" jdbcType="VARCHAR"/>
+        <result property="数据挖掘" column="数据挖掘" jdbcType="VARCHAR"/>
+        <result property="人工智能" column="人工智能" jdbcType="VARCHAR"/>
+        <result property="云计算与并行技术" column="云计算与并行技术" jdbcType="VARCHAR"/>
+        <result property="幸福心理学" column="幸福心理学" jdbcType="VARCHAR"/>
+        <result property="信息检索" column="信息检索" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 获取所有报名信息 -->
+    <select id="getAllDeclareInformation" resultMap="BaseDeclareInformation">
+        SELECT * FROM declare_information
+    </select>
+
+    <!-- 根据用户ID获取报名信息 -->
+    <select id="getDeclareInformationById" parameterType="java.lang.Integer" resultMap="BaseDeclareInformation">
+        SELECT * FROM declare_information WHERE id = #{id}
+    </select>
+
+    <!-- 插入报名信息 -->
+    <insert id="insertDeclareInformation" parameterType="com.tsj.project.DeclareInformation">
+        INSERT INTO declare_information (id) VALUES (#{id})
+    </insert>
+
+    <!-- 更新报名信息 -->
+    <update id="updateDeclareInformation" parameterType="com.tsj.project.DeclareInformation">
+        UPDATE declare_information SET
+        `思想道德与法治` = #{思想道德与法治},
+        `中国近现代史纲要` = #{中国近现代史纲要},
+        `马克思主义基本原理` = #{马克思主义基本原理},
+        `毛泽东思想和中国特色社会主义理论体系概论` = #{毛泽东思想和中国特色社会主义理论体系概论},
+        `习近平新时代中国特色社会主义思想概论` = #{习近平新时代中国特色社会主义思想概论},
+        `形势与政策Ⅰ` = #{形势与政策Ⅰ},
+        `形势与政策Ⅱ` = #{形势与政策Ⅱ},
+        `形势与政策Ⅲ` = #{形势与政策Ⅲ},
+        `形势与政策Ⅳ` = #{形势与政策Ⅳ},
+        `形势与政策V` = #{形势与政策V},
+        `形势与政策VⅠ` = #{形势与政策VⅠ},
+        `形势与政策VⅡ` = #{形势与政策VⅡ},
+        `形势与政策VⅢ` = #{形势与政策VⅢ},
+        `智能加交通` = #{智能加交通},
+        `区块链技术及应用` = #{区块链技术及应用},
+        `现代铁路信息技术` = #{现代铁路信息技术},
+        `军事理论` = #{军事理论},
+        `军事技能` = #{军事技能},
+        `体育Ⅰ` = #{体育Ⅰ},
+        `体育Ⅱ` = #{体育Ⅱ},
+        `体育Ⅲ` = #{体育Ⅲ},
+        `体育Ⅳ` = #{体育Ⅳ},
+        `体育健康课程Ⅰ` = #{体育健康课程Ⅰ},
+        `体育健康课程Ⅱ` = #{体育健康课程Ⅱ},
+        `英语Ⅰ` = #{英语Ⅰ},
+        `英语Ⅱ` = #{英语Ⅱ},
+        `通用学术英语` = #{通用学术英语},
+        `职场英语` = #{职场英语},
+        `交际与文化视听说` = #{交际与文化视听说},
+        `语言文化与翻译` = #{语言文化与翻译},
+        `英语公共演讲` = #{英语公共演讲},
+        `计算机学科前沿导论` = #{计算机学科前沿导论},
+        `软件学科前沿导论` = #{软件学科前沿导论},
+        `高等数学Ⅰ` = #{高等数学Ⅰ},
+        `高等数学Ⅱ` = #{高等数学Ⅱ},
+        `线性代数B` = #{线性代数B},
+        `概率论与数理统计` = #{概率论与数理统计},
+        `离散数学` = #{离散数学},
+        `大学物理BⅠ` = #{大学物理BⅠ},
+        `大学物理BⅡ` = #{大学物理BⅡ},
+        `大学物理实验Ⅰ` = #{大学物理实验Ⅰ},
+        `大学物理实验Ⅱ` = #{大学物理实验Ⅱ},
+        `高级语言程序设计` = #{高级语言程序设计},
+        `面向对象程序设计` = #{面向对象程序设计},
+        `数字电子技术B` = #{数字电子技术B},
+        `数字电子技术实验` = #{数字电子技术实验},
+        `数据结构A` = #{数据结构A},
+        `数据结构实验` = #{数据结构实验},
+        `计算机组成原理B` = #{计算机组成原理B},
+        `计算机组成实验` = #{计算机组成实验},
+        `算法分析与设计B` = #{算法分析与设计B},
+        `算法分析与设计实验` = #{算法分析与设计实验},
+        `数据库原理` = #{数据库原理},
+        `数据库原理实验` = #{数据库原理实验},
+        `操作系统` = #{操作系统},
+        `操作系统实验` = #{操作系统实验},
+        `软件工程` = #{软件工程},
+        `计算机网络` = #{计算机网络},
+        `计算机网络工程实验` = #{计算机网络工程实验},
+        `软件系统分析与设计` = #{软件系统分析与设计},
+        `编译原理` = #{编译原理},
+        `人机交互技术` = #{人机交互技术},
+        `人机交互技术实验` = #{人机交互技术实验},
+        `新技术讲座` = #{新技术讲座},
+        `软件项目管理` = #{软件项目管理},
+        `计算机图形学` = #{计算机图形学},
+        `计算机图形学实验` = #{计算机图形学实验},
+        `软件质量保证与测试` = #{软件质量保证与测试},
+        `软件综合课程设计` = #{软件综合课程设计},
+        `Java开发技术` = #{Java开发技术},
+        `Linux内核分析` = #{Linux内核分析},
+        `软件设计模式` = #{软件设计模式},
+        `软件设计模式实验` = #{软件设计模式实验},
+        `数据挖掘` = #{数据挖掘},
+        `人工智能` = #{人工智能},
+        `云计算与并行技术` = #{云计算与并行技术},
+        `幸福心理学` = #{幸福心理学},
+        `信息检索` = #{信息检索}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除报名信息 -->
+    <delete id="deleteDeclareInformation" parameterType="java.lang.Integer">
+        DELETE FROM declare_information WHERE id = #{id}
+    </delete>
+
+    <!-- 更新单个课程的报名状态 -->
+    <update id="updateCourseStatus">
+        UPDATE declare_information 
+        <choose>
+            <when test="courseName == '思想道德与法治'">SET `思想道德与法治` = #{status}</when>
+            <when test="courseName == '中国近现代史纲要'">SET `中国近现代史纲要` = #{status}</when>
+            <when test="courseName == '马克思主义基本原理'">SET `马克思主义基本原理` = #{status}</when>
+            <when test="courseName == '毛泽东思想和中国特色社会主义理论体系概论'">SET `毛泽东思想和中国特色社会主义理论体系概论` = #{status}</when>
+            <when test="courseName == '习近平新时代中国特色社会主义思想概论'">SET `习近平新时代中国特色社会主义思想概论` = #{status}</when>
+            <when test="courseName == '形势与政策Ⅰ'">SET `形势与政策Ⅰ` = #{status}</when>
+            <when test="courseName == '形势与政策Ⅱ'">SET `形势与政策Ⅱ` = #{status}</when>
+            <when test="courseName == '形势与政策Ⅲ'">SET `形势与政策Ⅲ` = #{status}</when>
+            <when test="courseName == '形势与政策Ⅳ'">SET `形势与政策Ⅳ` = #{status}</when>
+            <when test="courseName == '形势与政策V'">SET `形势与政策V` = #{status}</when>
+            <when test="courseName == '形势与政策VⅠ'">SET `形势与政策VⅠ` = #{status}</when>
+            <when test="courseName == '形势与政策VⅡ'">SET `形势与政策VⅡ` = #{status}</when>
+            <when test="courseName == '形势与政策VⅢ'">SET `形势与政策VⅢ` = #{status}</when>
+            <when test="courseName == '智能加交通'">SET `智能加交通` = #{status}</when>
+            <when test="courseName == '区块链技术及应用'">SET `区块链技术及应用` = #{status}</when>
+            <when test="courseName == '现代铁路信息技术'">SET `现代铁路信息技术` = #{status}</when>
+            <when test="courseName == '军事理论'">SET `军事理论` = #{status}</when>
+            <when test="courseName == '军事技能'">SET `军事技能` = #{status}</when>
+            <when test="courseName == '体育Ⅰ'">SET `体育Ⅰ` = #{status}</when>
+            <when test="courseName == '体育Ⅱ'">SET `体育Ⅱ` = #{status}</when>
+            <when test="courseName == '体育Ⅲ'">SET `体育Ⅲ` = #{status}</when>
+            <when test="courseName == '体育Ⅳ'">SET `体育Ⅳ` = #{status}</when>
+            <when test="courseName == '体育健康课程Ⅰ'">SET `体育健康课程Ⅰ` = #{status}</when>
+            <when test="courseName == '体育健康课程Ⅱ'">SET `体育健康课程Ⅱ` = #{status}</when>
+            <when test="courseName == '英语Ⅰ'">SET `英语Ⅰ` = #{status}</when>
+            <when test="courseName == '英语Ⅱ'">SET `英语Ⅱ` = #{status}</when>
+            <when test="courseName == '通用学术英语'">SET `通用学术英语` = #{status}</when>
+            <when test="courseName == '职场英语'">SET `职场英语` = #{status}</when>
+            <when test="courseName == '交际与文化视听说'">SET `交际与文化视听说` = #{status}</when>
+            <when test="courseName == '语言文化与翻译'">SET `语言文化与翻译` = #{status}</when>
+            <when test="courseName == '英语公共演讲'">SET `英语公共演讲` = #{status}</when>
+            <when test="courseName == '计算机学科前沿导论'">SET `计算机学科前沿导论` = #{status}</when>
+            <when test="courseName == '软件学科前沿导论'">SET `软件学科前沿导论` = #{status}</when>
+            <when test="courseName == '高等数学Ⅰ'">SET `高等数学Ⅰ` = #{status}</when>
+            <when test="courseName == '高等数学Ⅱ'">SET `高等数学Ⅱ` = #{status}</when>
+            <when test="courseName == '线性代数B'">SET `线性代数B` = #{status}</when>
+            <when test="courseName == '概率论与数理统计'">SET `概率论与数理统计` = #{status}</when>
+            <when test="courseName == '离散数学'">SET `离散数学` = #{status}</when>
+            <when test="courseName == '大学物理BⅠ'">SET `大学物理BⅠ` = #{status}</when>
+            <when test="courseName == '大学物理BⅡ'">SET `大学物理BⅡ` = #{status}</when>
+            <when test="courseName == '大学物理实验Ⅰ'">SET `大学物理实验Ⅰ` = #{status}</when>
+            <when test="courseName == '大学物理实验Ⅱ'">SET `大学物理实验Ⅱ` = #{status}</when>
+            <when test="courseName == '高级语言程序设计'">SET `高级语言程序设计` = #{status}</when>
+            <when test="courseName == '面向对象程序设计'">SET `面向对象程序设计` = #{status}</when>
+            <when test="courseName == '数字电子技术B'">SET `数字电子技术B` = #{status}</when>
+            <when test="courseName == '数字电子技术实验'">SET `数字电子技术实验` = #{status}</when>
+            <when test="courseName == '数据结构A'">SET `数据结构A` = #{status}</when>
+            <when test="courseName == '数据结构实验'">SET `数据结构实验` = #{status}</when>
+            <when test="courseName == '计算机组成原理B'">SET `计算机组成原理B` = #{status}</when>
+            <when test="courseName == '计算机组成实验'">SET `计算机组成实验` = #{status}</when>
+            <when test="courseName == '算法分析与设计B'">SET `算法分析与设计B` = #{status}</when>
+            <when test="courseName == '算法分析与设计实验'">SET `算法分析与设计实验` = #{status}</when>
+            <when test="courseName == '数据库原理'">SET `数据库原理` = #{status}</when>
+            <when test="courseName == '数据库原理实验'">SET `数据库原理实验` = #{status}</when>
+            <when test="courseName == '操作系统'">SET `操作系统` = #{status}</when>
+            <when test="courseName == '操作系统实验'">SET `操作系统实验` = #{status}</when>
+            <when test="courseName == '软件工程'">SET `软件工程` = #{status}</when>
+            <when test="courseName == '计算机网络'">SET `计算机网络` = #{status}</when>
+            <when test="courseName == '计算机网络工程实验'">SET `计算机网络工程实验` = #{status}</when>
+            <when test="courseName == '软件系统分析与设计'">SET `软件系统分析与设计` = #{status}</when>
+            <when test="courseName == '编译原理'">SET `编译原理` = #{status}</when>
+            <when test="courseName == '人机交互技术'">SET `人机交互技术` = #{status}</when>
+            <when test="courseName == '人机交互技术实验'">SET `人机交互技术实验` = #{status}</when>
+            <when test="courseName == '新技术讲座'">SET `新技术讲座` = #{status}</when>
+            <when test="courseName == '软件项目管理'">SET `软件项目管理` = #{status}</when>
+            <when test="courseName == '计算机图形学'">SET `计算机图形学` = #{status}</when>
+            <when test="courseName == '计算机图形学实验'">SET `计算机图形学实验` = #{status}</when>
+            <when test="courseName == '软件质量保证与测试'">SET `软件质量保证与测试` = #{status}</when>
+            <when test="courseName == '软件综合课程设计'">SET `软件综合课程设计` = #{status}</when>
+            <when test="courseName == 'Java开发技术'">SET `Java开发技术` = #{status}</when>
+            <when test="courseName == 'Linux内核分析'">SET `Linux内核分析` = #{status}</when>
+            <when test="courseName == '软件设计模式'">SET `软件设计模式` = #{status}</when>
+            <when test="courseName == '软件设计模式实验'">SET `软件设计模式实验` = #{status}</when>
+            <when test="courseName == '数据挖掘'">SET `数据挖掘` = #{status}</when>
+            <when test="courseName == '人工智能'">SET `人工智能` = #{status}</when>
+            <when test="courseName == '云计算与并行技术'">SET `云计算与并行技术` = #{status}</when>
+            <when test="courseName == '幸福心理学'">SET `幸福心理学` = #{status}</when>
+            <when test="courseName == '信息检索'">SET `信息检索` = #{status}</when>
+            <otherwise>SET `${courseName}` = #{status}</otherwise>
+        </choose>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 获取指定用户的指定课程报名状态 -->
+    <select id="getCourseStatus" resultType="java.lang.String">
+        SELECT 
+        <choose>
+            <when test="courseName == '思想道德与法治'">`思想道德与法治`</when>
+            <when test="courseName == '中国近现代史纲要'">`中国近现代史纲要`</when>
+            <when test="courseName == '马克思主义基本原理'">`马克思主义基本原理`</when>
+            <when test="courseName == '毛泽东思想和中国特色社会主义理论体系概论'">`毛泽东思想和中国特色社会主义理论体系概论`</when>
+            <when test="courseName == '习近平新时代中国特色社会主义思想概论'">`习近平新时代中国特色社会主义思想概论`</when>
+            <when test="courseName == '形势与政策Ⅰ'">`形势与政策Ⅰ`</when>
+            <when test="courseName == '形势与政策Ⅱ'">`形势与政策Ⅱ`</when>
+            <when test="courseName == '形势与政策Ⅲ'">`形势与政策Ⅲ`</when>
+            <when test="courseName == '形势与政策Ⅳ'">`形势与政策Ⅳ`</when>
+            <when test="courseName == '形势与政策V'">`形势与政策V`</when>
+            <when test="courseName == '形势与政策VⅠ'">`形势与政策VⅠ`</when>
+            <when test="courseName == '形势与政策VⅡ'">`形势与政策VⅡ`</when>
+            <when test="courseName == '形势与政策VⅢ'">`形势与政策VⅢ`</when>
+            <when test="courseName == '智能加交通'">`智能加交通`</when>
+            <when test="courseName == '区块链技术及应用'">`区块链技术及应用`</when>
+            <when test="courseName == '现代铁路信息技术'">`现代铁路信息技术`</when>
+            <when test="courseName == '军事理论'">`军事理论`</when>
+            <when test="courseName == '军事技能'">`军事技能`</when>
+            <when test="courseName == '体育Ⅰ'">`体育Ⅰ`</when>
+            <when test="courseName == '体育Ⅱ'">`体育Ⅱ`</when>
+            <when test="courseName == '体育Ⅲ'">`体育Ⅲ`</when>
+            <when test="courseName == '体育Ⅳ'">`体育Ⅳ`</when>
+            <when test="courseName == '体育健康课程Ⅰ'">`体育健康课程Ⅰ`</when>
+            <when test="courseName == '体育健康课程Ⅱ'">`体育健康课程Ⅱ`</when>
+            <when test="courseName == '英语Ⅰ'">`英语Ⅰ`</when>
+            <when test="courseName == '英语Ⅱ'">`英语Ⅱ`</when>
+            <when test="courseName == '通用学术英语'">`通用学术英语`</when>
+            <when test="courseName == '职场英语'">`职场英语`</when>
+            <when test="courseName == '交际与文化视听说'">`交际与文化视听说`</when>
+            <when test="courseName == '语言文化与翻译'">`语言文化与翻译`</when>
+            <when test="courseName == '英语公共演讲'">`英语公共演讲`</when>
+            <when test="courseName == '计算机学科前沿导论'">`计算机学科前沿导论`</when>
+            <when test="courseName == '软件学科前沿导论'">`软件学科前沿导论`</when>
+            <when test="courseName == '高等数学Ⅰ'">`高等数学Ⅰ`</when>
+            <when test="courseName == '高等数学Ⅱ'">`高等数学Ⅱ`</when>
+            <when test="courseName == '线性代数B'">`线性代数B`</when>
+            <when test="courseName == '概率论与数理统计'">`概率论与数理统计`</when>
+            <when test="courseName == '离散数学'">`离散数学`</when>
+            <when test="courseName == '大学物理BⅠ'">`大学物理BⅠ`</when>
+            <when test="courseName == '大学物理BⅡ'">`大学物理BⅡ`</when>
+            <when test="courseName == '大学物理实验Ⅰ'">`大学物理实验Ⅰ`</when>
+            <when test="courseName == '大学物理实验Ⅱ'">`大学物理实验Ⅱ`</when>
+            <when test="courseName == '高级语言程序设计'">`高级语言程序设计`</when>
+            <when test="courseName == '面向对象程序设计'">`面向对象程序设计`</when>
+            <when test="courseName == '数字电子技术B'">`数字电子技术B`</when>
+            <when test="courseName == '数字电子技术实验'">`数字电子技术实验`</when>
+            <when test="courseName == '数据结构A'">`数据结构A`</when>
+            <when test="courseName == '数据结构实验'">`数据结构实验`</when>
+            <when test="courseName == '计算机组成原理B'">`计算机组成原理B`</when>
+            <when test="courseName == '计算机组成实验'">`计算机组成实验`</when>
+            <when test="courseName == '算法分析与设计B'">`算法分析与设计B`</when>
+            <when test="courseName == '算法分析与设计实验'">`算法分析与设计实验`</when>
+            <when test="courseName == '数据库原理'">`数据库原理`</when>
+            <when test="courseName == '数据库原理实验'">`数据库原理实验`</when>
+            <when test="courseName == '操作系统'">`操作系统`</when>
+            <when test="courseName == '操作系统实验'">`操作系统实验`</when>
+            <when test="courseName == '软件工程'">`软件工程`</when>
+            <when test="courseName == '计算机网络'">`计算机网络`</when>
+            <when test="courseName == '计算机网络工程实验'">`计算机网络工程实验`</when>
+            <when test="courseName == '软件系统分析与设计'">`软件系统分析与设计`</when>
+            <when test="courseName == '编译原理'">`编译原理`</when>
+            <when test="courseName == '人机交互技术'">`人机交互技术`</when>
+            <when test="courseName == '人机交互技术实验'">`人机交互技术实验`</when>
+            <when test="courseName == '新技术讲座'">`新技术讲座`</when>
+            <when test="courseName == '软件项目管理'">`软件项目管理`</when>
+            <when test="courseName == '计算机图形学'">`计算机图形学`</when>
+            <when test="courseName == '计算机图形学实验'">`计算机图形学实验`</when>
+            <when test="courseName == '软件质量保证与测试'">`软件质量保证与测试`</when>
+            <when test="courseName == '软件综合课程设计'">`软件综合课程设计`</when>
+            <when test="courseName == 'Java开发技术'">`Java开发技术`</when>
+            <when test="courseName == 'Linux内核分析'">`Linux内核分析`</when>
+            <when test="courseName == '软件设计模式'">`软件设计模式`</when>
+            <when test="courseName == '软件设计模式实验'">`软件设计模式实验`</when>
+            <when test="courseName == '数据挖掘'">`数据挖掘`</when>
+            <when test="courseName == '人工智能'">`人工智能`</when>
+            <when test="courseName == '云计算与并行技术'">`云计算与并行技术`</when>
+            <when test="courseName == '幸福心理学'">`幸福心理学`</when>
+            <when test="courseName == '信息检索'">`信息检索`</when>
+            <otherwise>`${courseName}`</otherwise>
+        </choose>
+        FROM declare_information WHERE id = #{id}
+    </select>
+
+    <!-- 获取指定状态的报名记录数量 -->
+    <select id="countByStatus" parameterType="java.lang.String" resultType="java.lang.Integer">
+        <![CDATA[
+        SELECT COUNT(*) FROM declare_information WHERE 
+        `思想道德与法治` = #{status} OR `中国近现代史纲要` = #{status} OR `马克思主义基本原理` = #{status} OR
+        `毛泽东思想和中国特色社会主义理论体系概论` = #{status} OR `习近平新时代中国特色社会主义思想概论` = #{status} OR
+        `形势与政策Ⅰ` = #{status} OR `形势与政策Ⅱ` = #{status} OR `形势与政策Ⅲ` = #{status} OR `形势与政策Ⅳ` = #{status} OR
+        `形势与政策V` = #{status} OR `形势与政策VⅠ` = #{status} OR `形势与政策VⅡ` = #{status} OR `形势与政策VⅢ` = #{status} OR
+        `智能加交通` = #{status} OR `区块链技术及应用` = #{status} OR `现代铁路信息技术` = #{status} OR
+        `军事理论` = #{status} OR `军事技能` = #{status} OR
+        `体育Ⅰ` = #{status} OR `体育Ⅱ` = #{status} OR `体育Ⅲ` = #{status} OR `体育Ⅳ` = #{status} OR
+        `体育健康课程Ⅰ` = #{status} OR `体育健康课程Ⅱ` = #{status} OR
+        `英语Ⅰ` = #{status} OR `英语Ⅱ` = #{status} OR `通用学术英语` = #{status} OR `职场英语` = #{status} OR
+        `交际与文化视听说` = #{status} OR `语言文化与翻译` = #{status} OR `英语公共演讲` = #{status} OR
+        `计算机学科前沿导论` = #{status} OR `软件学科前沿导论` = #{status} OR
+        `高等数学Ⅰ` = #{status} OR `高等数学Ⅱ` = #{status} OR `线性代数B` = #{status} OR `概率论与数理统计` = #{status} OR
+        `离散数学` = #{status} OR `大学物理BⅠ` = #{status} OR `大学物理BⅡ` = #{status} OR
+        `大学物理实验Ⅰ` = #{status} OR `大学物理实验Ⅱ` = #{status} OR
+        `高级语言程序设计` = #{status} OR `面向对象程序设计` = #{status} OR `数字电子技术B` = #{status} OR
+        `数字电子技术实验` = #{status} OR `数据结构A` = #{status} OR `数据结构实验` = #{status} OR
+        `计算机组成原理B` = #{status} OR `计算机组成实验` = #{status} OR
+        `算法分析与设计B` = #{status} OR `算法分析与设计实验` = #{status} OR `数据库原理` = #{status} OR
+        `数据库原理实验` = #{status} OR `操作系统` = #{status} OR `操作系统实验` = #{status} OR
+        `软件工程` = #{status} OR `计算机网络` = #{status} OR `计算机网络工程实验` = #{status} OR
+        `软件系统分析与设计` = #{status} OR `编译原理` = #{status} OR `人机交互技术` = #{status} OR
+        `人机交互技术实验` = #{status} OR `新技术讲座` = #{status} OR `软件项目管理` = #{status} OR
+        `计算机图形学` = #{status} OR `计算机图形学实验` = #{status} OR `软件质量保证与测试` = #{status} OR
+        `软件综合课程设计` = #{status} OR `Java开发技术` = #{status} OR `Linux内核分析` = #{status} OR
+        `软件设计模式` = #{status} OR `软件设计模式实验` = #{status} OR `数据挖掘` = #{status} OR
+        `人工智能` = #{status} OR `云计算与并行技术` = #{status} OR `幸福心理学` = #{status} OR `信息检索` = #{status}
+        ]]>
+    </select>
+
+    <!-- 获取用户的报名统计信息 -->
+    <select id="getDeclareStatistics" parameterType="java.lang.Integer" resultType="java.util.Map">
+        <![CDATA[
+        SELECT 
+        SUM(CASE WHEN `思想道德与法治` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `中国近现代史纲要` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `马克思主义基本原理` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `毛泽东思想和中国特色社会主义理论体系概论` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `习近平新时代中国特色社会主义思想概论` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `形势与政策Ⅰ` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `形势与政策Ⅱ` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `形势与政策Ⅲ` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `形势与政策Ⅳ` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `形势与政策V` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `形势与政策VⅠ` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `形势与政策VⅡ` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `形势与政策VⅢ` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `智能加交通` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `区块链技术及应用` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `现代铁路信息技术` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `军事理论` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `军事技能` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `体育Ⅰ` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `体育Ⅱ` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `体育Ⅲ` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `体育Ⅳ` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `体育健康课程Ⅰ` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `体育健康课程Ⅱ` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `英语Ⅰ` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `英语Ⅱ` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `通用学术英语` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `职场英语` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `交际与文化视听说` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `语言文化与翻译` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `英语公共演讲` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `计算机学科前沿导论` = '未报名' THEN 1 ELSE 0 END +
+            CASE WHEN `软件学科前沿导论` = '未报名' THEN 1 ELSE 0 END) AS undeclared,
+        SUM(CASE WHEN `思想道德与法治` = '已报名' THEN 1 ELSE 0 END +
+            CASE WHEN `中国近现代史纲要` = '已报名' THEN 1 ELSE 0 END +
+            CASE WHEN `马克思主义基本原理` = '已报名' THEN 1 ELSE 0 END) AS declared,
+        SUM(CASE WHEN `思想道德与法治` = '已通过' THEN 1 ELSE 0 END +
+            CASE WHEN `中国近现代史纲要` = '已通过' THEN 1 ELSE 0 END +
+            CASE WHEN `马克思主义基本原理` = '已通过' THEN 1 ELSE 0 END) AS approved
+        FROM declare_information WHERE id = #{id}
+        ]]>
+    </select>
+
+</mapper>

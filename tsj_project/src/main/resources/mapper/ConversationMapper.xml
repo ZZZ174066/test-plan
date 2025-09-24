@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tsj.Mapper.ConversationMapper">
+
+    <!-- ConversationMessage 结果映射 -->
+    <resultMap id="ConversationMessageResultMap" type="com.tsj.project.ConversationMessage">
+        <id property="messageId" column="message_id"/>
+        <result property="teacherId" column="teacher_id"/>
+        <result property="studentId" column="student_id"/>
+        <result property="content" column="content"/>
+        <result property="senderType" column="sender_type"/>
+        <result property="sendTime" column="send_time"/>
+        <result property="isRead" column="is_read"/>
+        <result property="senderName" column="sender_name"/>
+        <result property="senderAvatar" column="sender_avatar"/>
+    </resultMap>
+
+    <!-- Conversation 结果映射 -->
+    <resultMap id="ConversationResultMap" type="com.tsj.project.Conversation">
+        <result property="teacherId" column="teacher_id"/>
+        <result property="studentId" column="student_id"/>
+        <result property="studentName" column="student_name"/>
+        <result property="studentAvatar" column="student_avatar"/>
+        <result property="messageCount" column="message_count"/>
+        <result property="lastMessageTime" column="last_message_time"/>
+        <result property="lastMessageContent" column="last_message_content"/>
+        <result property="hasUnread" column="has_unread"/>
+    </resultMap>
+
+    <!-- 消息表基本字段 -->
+    <sql id="Message_Column_List">
+        message_id, teacher_id, student_id, content, sender_type, send_time, is_read
+    </sql>
+
+    <!-- 插入消息 -->
+    <insert id="insertMessage" parameterType="com.tsj.project.ConversationMessage">
+        INSERT INTO conversation_messages (teacher_id, student_id, content, sender_type, send_time, is_read)
+        VALUES (#{teacherId}, #{studentId}, #{content}, #{senderType}, #{sendTime}, #{isRead})
+    </insert>
+
+    <!-- 获取教师的对话列表 -->
+    <select id="getConversationsByTeacherId" resultMap="ConversationResultMap">
+        SELECT 
+            cm.teacher_id,
+            cm.student_id,
+            su_student.real_name as student_name,
+            su_student.avatar as student_avatar,
+            COUNT(cm.message_id) as message_count,
+            MAX(cm.send_time) as last_message_time,
+            (SELECT content FROM conversation_messages 
+             WHERE teacher_id = cm.teacher_id AND student_id = cm.student_id 
+             ORDER BY send_time DESC LIMIT 1) as last_message_content,
+            CASE WHEN EXISTS(
+                SELECT 1 FROM conversation_messages 
+                WHERE teacher_id = cm.teacher_id 
+                  AND student_id = cm.student_id 
+                  AND sender_type = 1 
+                  AND is_read = 0
+            ) THEN 1 ELSE 0 END as has_unread
+        FROM conversation_messages cm
+        LEFT JOIN sys_user su_student ON cm.student_id = su_student.id
+        WHERE cm.teacher_id = #{teacherId}
+        GROUP BY cm.teacher_id, cm.student_id, su_student.real_name, su_student.avatar
+        ORDER BY last_message_time DESC
+    </select>
+
+    <!-- 获取学生的对话列表 -->
+    <select id="getConversationsByStudentId" resultMap="ConversationResultMap">
+        SELECT 
+            cm.teacher_id,
+            cm.student_id,
+            su_teacher.real_name as student_name,
+            su_teacher.avatar as student_avatar,
+            COUNT(cm.message_id) as message_count,
+            MAX(cm.send_time) as last_message_time,
+            (SELECT content FROM conversation_messages 
+             WHERE teacher_id = cm.teacher_id AND student_id = cm.student_id 
+             ORDER BY send_time DESC LIMIT 1) as last_message_content,
+            CASE WHEN EXISTS(
+                SELECT 1 FROM conversation_messages 
+                WHERE teacher_id = cm.teacher_id 
+                  AND student_id = cm.student_id 
+                  AND sender_type = 2 
+                  AND is_read = 0
+            ) THEN 1 ELSE 0 END as has_unread
+        FROM conversation_messages cm
+        LEFT JOIN sys_user su_teacher ON cm.teacher_id = su_teacher.id
+        WHERE cm.student_id = #{studentId}
+        GROUP BY cm.teacher_id, cm.student_id, su_teacher.real_name, su_teacher.avatar
+        ORDER BY last_message_time DESC
+    </select>
+
+    <!-- 获取师生之间的消息列表 -->
+    <select id="getMessagesByTeacherAndStudent" resultMap="ConversationMessageResultMap">
+        SELECT 
+            cm.*,
+            CASE 
+                WHEN cm.sender_type = 1 THEN su_student.real_name
+                WHEN cm.sender_type = 2 THEN su_teacher.real_name
+            END as sender_name,
+            CASE 
+                WHEN cm.sender_type = 1 THEN su_student.avatar
+                WHEN cm.sender_type = 2 THEN su_teacher.avatar
+            END as sender_avatar
+        FROM conversation_messages cm
+        LEFT JOIN sys_user su_student ON cm.student_id = su_student.id
+        LEFT JOIN sys_user su_teacher ON cm.teacher_id = su_teacher.id
+        WHERE cm.teacher_id = #{teacherId} AND cm.student_id = #{studentId}
+        ORDER BY cm.send_time ASC
+    </select>
+
+    <!-- 标记消息为已读 -->
+    <update id="markMessagesAsRead">
+        UPDATE conversation_messages 
+        SET is_read = 1
+        WHERE teacher_id = #{teacherId} 
+          AND student_id = #{studentId}
+          AND sender_type != #{readerType}
+          AND is_read = 0
+    </update>
+
+</mapper>

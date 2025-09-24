@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tsj.Mapper.TeachInformationMapper">
+
+    <!-- 基础结果映射（不包含用户信息） -->
+    <resultMap id="BaseTeachInformation" type="com.tsj.project.TeachInformation">
+        <id column="teacher_id" property="teacherId" jdbcType="INTEGER"/>
+        <result column="subject1" property="subject1" jdbcType="VARCHAR"/>
+        <result column="subject2" property="subject2" jdbcType="VARCHAR"/>
+        <result column="subject3" property="subject3" jdbcType="VARCHAR"/>
+        <result column="subject4" property="subject4" jdbcType="VARCHAR"/>
+        <result column="subject5" property="subject5" jdbcType="VARCHAR"/>
+        <result column="subject6" property="subject6" jdbcType="VARCHAR"/>
+        <result column="subject7" property="subject7" jdbcType="VARCHAR"/>
+        <result column="subject8" property="subject8" jdbcType="VARCHAR"/>
+        <result column="subject9" property="subject9" jdbcType="VARCHAR"/>
+        <result column="subject10" property="subject10" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <!-- 扩展结果映射（包含用户信息） -->
+    <resultMap id="ExtendedTeachInformation" type="com.tsj.project.TeachInformation">
+        <id column="teacher_id" property="teacherId" jdbcType="INTEGER"/>
+        <result column="subject1" property="subject1" jdbcType="VARCHAR"/>
+        <result column="subject2" property="subject2" jdbcType="VARCHAR"/>
+        <result column="subject3" property="subject3" jdbcType="VARCHAR"/>
+        <result column="subject4" property="subject4" jdbcType="VARCHAR"/>
+        <result column="subject5" property="subject5" jdbcType="VARCHAR"/>
+        <result column="subject6" property="subject6" jdbcType="VARCHAR"/>
+        <result column="subject7" property="subject7" jdbcType="VARCHAR"/>
+        <result column="subject8" property="subject8" jdbcType="VARCHAR"/>
+        <result column="subject9" property="subject9" jdbcType="VARCHAR"/>
+        <result column="subject10" property="subject10" jdbcType="VARCHAR"/>
+        <!-- 添加教师基本信息字段 -->
+        <result column="teacher_name" property="teacherName" jdbcType="VARCHAR"/>
+        <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="online_status" property="onlineStatus" jdbcType="INTEGER"/>
+        <result column="avatar" property="avatar" jdbcType="CLOB"/>
+    </resultMap>
+
+    <!-- 基础查询字段 -->
+    <sql id="Base_Column_List">
+        teacher_id, subject1, subject2, subject3, subject4, subject5, subject6, subject7, subject8, subject9, subject10
+    </sql>
+
+    <!-- 扩展查询字段（包含教师基本信息） -->
+    <sql id="Extended_Column_List">
+        ti.teacher_id, ti.subject1, ti.subject2, ti.subject3, ti.subject4, ti.subject5, ti.subject6, ti.subject7, ti.subject8, ti.subject9, ti.subject10,
+        u.real_name as teacher_name, u.phone as phone_number, u.email, u.online_status, u.avatar
+    </sql>
+
+    <!-- 获取所有教学信息（关联用户表获取教师基本信息） -->
+    <select id="getAllTeachInformation" resultMap="ExtendedTeachInformation">
+        SELECT <include refid="Extended_Column_List"/>
+        FROM teach_information ti
+        LEFT JOIN sys_user u ON ti.teacher_id = u.id
+        WHERE u.user_type = 2
+        ORDER BY ti.teacher_id ASC
+    </select>
+
+    <!-- 根据教师ID获取教学信息 -->
+    <select id="getTeachInformationByTeacherId" parameterType="java.lang.Integer" resultMap="BaseTeachInformation">
+        SELECT <include refid="Base_Column_List"/>
+        FROM teach_information
+        WHERE teacher_id = #{teacherId}
+    </select>
+
+    <!-- 插入教学信息 -->
+    <insert id="insertTeachInformation" parameterType="com.tsj.project.TeachInformation">
+        INSERT INTO teach_information (teacher_id, subject1, subject2, subject3, subject4, subject5, subject6, subject7, subject8, subject9, subject10)
+        VALUES (#{teacherId}, #{subject1}, #{subject2}, #{subject3}, #{subject4}, #{subject5}, #{subject6}, #{subject7}, #{subject8}, #{subject9}, #{subject10})
+    </insert>
+
+    <!-- 更新教学信息 -->
+    <update id="updateTeachInformation" parameterType="com.tsj.project.TeachInformation">
+        UPDATE teach_information
+        SET subject1 = #{subject1},
+            subject2 = #{subject2},
+            subject3 = #{subject3},
+            subject4 = #{subject4},
+            subject5 = #{subject5},
+            subject6 = #{subject6},
+            subject7 = #{subject7},
+            subject8 = #{subject8},
+            subject9 = #{subject9},
+            subject10 = #{subject10}
+        WHERE teacher_id = #{teacherId}
+    </update>
+
+    <!-- 删除教学信息 -->
+    <delete id="deleteTeachInformation" parameterType="java.lang.Integer">
+        DELETE FROM teach_information WHERE teacher_id = #{teacherId}
+    </delete>
+
+    <!-- 根据学科搜索教师 -->
+    <select id="getTeachersBySubject" parameterType="java.lang.String" resultMap="BaseTeachInformation">
+        SELECT <include refid="Base_Column_List"/>
+        FROM teach_information
+        WHERE subject1 LIKE CONCAT('%', #{subject}, '%')
+           OR subject2 LIKE CONCAT('%', #{subject}, '%')
+           OR subject3 LIKE CONCAT('%', #{subject}, '%')
+           OR subject4 LIKE CONCAT('%', #{subject}, '%')
+           OR subject5 LIKE CONCAT('%', #{subject}, '%')
+           OR subject6 LIKE CONCAT('%', #{subject}, '%')
+           OR subject7 LIKE CONCAT('%', #{subject}, '%')
+           OR subject8 LIKE CONCAT('%', #{subject}, '%')
+           OR subject9 LIKE CONCAT('%', #{subject}, '%')
+           OR subject10 LIKE CONCAT('%', #{subject}, '%')
+        ORDER BY teacher_id ASC
+    </select>
+
+    <!-- 获取教师数量统计 -->
+    <select id="getTeacherCount" resultType="int">
+        SELECT COUNT(*) FROM teach_information
+    </select>
+
+    <!-- 获取有教学任务的教师数量 -->
+    <select id="getActiveTeacherCount" resultType="int">
+        SELECT COUNT(*) FROM teach_information
+        WHERE subject1 IS NOT NULL OR subject2 IS NOT NULL OR subject3 IS NOT NULL 
+           OR subject4 IS NOT NULL OR subject5 IS NOT NULL OR subject6 IS NOT NULL
+           OR subject7 IS NOT NULL OR subject8 IS NOT NULL OR subject9 IS NOT NULL
+           OR subject10 IS NOT NULL
+    </select>
+
+</mapper>

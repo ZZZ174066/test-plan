@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tsj.Mapper.TestInformationMapper">
+
+    <!-- 结果映射 -->
+    <resultMap id="BaseTestInformation" type="com.tsj.project.TestInformation">
+        <id column="test_id" property="testId" jdbcType="BIGINT"/>
+        <result column="course_id" property="courseId" jdbcType="BIGINT"/>
+        <result column="course_code" property="courseCode" jdbcType="VARCHAR"/>
+        <result column="course_name" property="courseName" jdbcType="VARCHAR"/>
+        <result column="exam_status" property="examStatus" jdbcType="VARCHAR"/>
+        <result column="exam_date" property="examDate" jdbcType="DATE"/>
+        <result column="exam_session" property="examSession" jdbcType="VARCHAR"/>
+        <result column="exam_location" property="examLocation" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 基础查询字段 -->
+    <sql id="Base_Column_List">
+        t.test_id, t.course_id, c.course_code, t.course_name, t.exam_status, t.exam_date, t.exam_session, t.exam_location
+    </sql>
+
+    <!-- 获取所有考试信息 -->
+    <select id="getAllTestInformation" resultMap="BaseTestInformation">
+        SELECT <include refid="Base_Column_List"/>
+        FROM test_information t
+        LEFT JOIN Course_information c ON t.course_id = c.course_id
+        ORDER BY t.course_id ASC
+    </select>
+
+    <!-- 根据考试ID获取考试信息 -->
+    <select id="getTestInformationById" parameterType="java.lang.Long" resultMap="BaseTestInformation">
+        SELECT <include refid="Base_Column_List"/>
+        FROM test_information t
+        LEFT JOIN Course_information c ON t.course_id = c.course_id
+        WHERE t.test_id = #{testId}
+    </select>
+
+    <!-- 根据课程ID获取考试信息 -->
+    <select id="getTestInformationByCourseId" parameterType="java.lang.Long" resultMap="BaseTestInformation">
+        SELECT <include refid="Base_Column_List"/>
+        FROM test_information t
+        LEFT JOIN Course_information c ON t.course_id = c.course_id
+        WHERE t.course_id = #{courseId}
+    </select>
+
+    <!-- 新增考试信息 -->
+    <insert id="insertTestInformation" parameterType="com.tsj.project.TestInformation" useGeneratedKeys="true" keyProperty="testId">
+        INSERT INTO test_information (course_id, course_name, exam_status, exam_date, exam_session, exam_location)
+        VALUES (#{courseId}, #{courseName}, #{examStatus}, #{examDate}, #{examSession}, #{examLocation})
+    </insert>
+
+    <!-- 更新考试信息 -->
+    <update id="updateTestInformation" parameterType="com.tsj.project.TestInformation">
+        UPDATE test_information
+        SET course_id = #{courseId},
+            course_name = #{courseName},
+            exam_status = #{examStatus},
+            exam_date = #{examDate},
+            exam_session = #{examSession},
+            exam_location = #{examLocation}
+        WHERE test_id = #{testId}
+    </update>
+
+    <!-- 删除考试信息 -->
+    <delete id="deleteTestInformation" parameterType="java.lang.Long">
+        DELETE FROM test_information WHERE test_id = #{testId}
+    </delete>
+
+    <!-- 根据课程ID删除考试信息 -->
+    <delete id="deleteTestInformationByCourseId" parameterType="java.lang.Long">
+        DELETE FROM test_information WHERE course_id = #{courseId}
+    </delete>
+
+    <!-- 根据考试状态获取考试信息列表 -->
+    <select id="getTestInformationByStatus" parameterType="java.lang.String" resultMap="BaseTestInformation">
+        SELECT <include refid="Base_Column_List"/>
+        FROM test_information t
+        LEFT JOIN Course_information c ON t.course_id = c.course_id
+        WHERE t.exam_status = #{examStatus}
+        ORDER BY t.course_id ASC
+    </select>
+
+    <!-- 根据考试日期获取考试信息列表 -->
+    <select id="getTestInformationByDate" parameterType="java.time.LocalDate" resultMap="BaseTestInformation">
+        SELECT <include refid="Base_Column_List"/>
+        FROM test_information t
+        LEFT JOIN Course_information c ON t.course_id = c.course_id
+        WHERE t.exam_date = #{examDate}
+        ORDER BY t.exam_session ASC, t.course_name ASC
+    </select>
+
+    <!-- 根据考试时段获取考试信息列表 -->
+    <select id="getTestInformationBySession" parameterType="java.lang.String" resultMap="BaseTestInformation">
+        SELECT <include refid="Base_Column_List"/>
+        FROM test_information t
+        LEFT JOIN Course_information c ON t.course_id = c.course_id
+        WHERE t.exam_session = #{examSession}
+        ORDER BY t.exam_date ASC, t.course_name ASC
+    </select>
+
+    <!-- 根据考试地点获取考试信息列表 -->
+    <select id="getTestInformationByLocation" parameterType="java.lang.String" resultMap="BaseTestInformation">
+        SELECT <include refid="Base_Column_List"/>
+        FROM test_information t
+        LEFT JOIN Course_information c ON t.course_id = c.course_id
+        WHERE t.exam_location = #{examLocation}
+        ORDER BY t.exam_date ASC, t.exam_session ASC, t.course_name ASC
+    </select>
+
+    <!-- 根据日期范围获取考试信息列表 -->
+    <select id="getTestInformationByDateRange" resultMap="BaseTestInformation">
+        <![CDATA[
+        SELECT ]]><include refid="Base_Column_List"/><![CDATA[
+        FROM test_information t
+        LEFT JOIN Course_information c ON t.course_id = c.course_id
+        WHERE t.exam_date >= #{startDate} AND t.exam_date <= #{endDate}
+        ORDER BY t.exam_date ASC, t.exam_session ASC, t.course_name ASC
+        ]]>
+    </select>
+
+    <!-- 更新考试状态 -->
+    <update id="updateExamStatus">
+        UPDATE test_information
+        SET exam_status = #{examStatus}
+        WHERE test_id = #{testId}
+    </update>
+
+    <!-- 安排考试 -->
+    <update id="scheduleExam">
+        UPDATE test_information
+        SET exam_status = '已安排',
+            exam_date = #{examDate},
+            exam_session = #{examSession},
+            exam_location = #{examLocation}
+        WHERE test_id = #{testId}
+    </update>
+
+    <!-- 取消考试安排 -->
+    <update id="cancelExamSchedule" parameterType="java.lang.Long">
+        UPDATE test_information
+        SET exam_status = '未安排',
+            exam_date = NULL,
+            exam_session = NULL,
+            exam_location = NULL
+        WHERE test_id = #{testId}
+    </update>
+
+    <!-- 统计各状态的考试数量 -->
+    <select id="getExamStatusStatistics" resultType="java.util.Map">
+        SELECT 
+            exam_status as status,
+            COUNT(*) as count
+        FROM test_information
+        GROUP BY exam_status
+        ORDER BY 
+            CASE exam_status 
+                WHEN '未安排' THEN 1 
+                WHEN '已安排' THEN 2 
+                WHEN '已考试' THEN 3 
+                ELSE 4 
+            END
+    </select>
+
+    <!-- 根据课程名称模糊查询考试信息 -->
+    <select id="searchTestInformationByCourseName" parameterType="java.lang.String" resultMap="BaseTestInformation">
+        SELECT <include refid="Base_Column_List"/>
+        FROM test_information t
+        LEFT JOIN Course_information c ON t.course_id = c.course_id
+        WHERE t.course_name LIKE CONCAT('%', #{courseName}, '%')
+        ORDER BY t.course_name ASC
+    </select>
+
+    <!-- 根据教师ID获取该教师教授学科的考试信息列表 -->
+    <select id="getExamsByTeacherId" parameterType="java.lang.Integer" resultMap="BaseTestInformation">
+        SELECT <include refid="Base_Column_List"/>
+        FROM test_information t
+        LEFT JOIN Course_information c ON t.course_id = c.course_id
+        LEFT JOIN teach_information ti ON ti.teacher_id = #{teacherId}
+        WHERE (t.course_name = ti.subject1 AND ti.subject1 IS NOT NULL AND ti.subject1 != '')
+           OR (t.course_name = ti.subject2 AND ti.subject2 IS NOT NULL AND ti.subject2 != '')
+           OR (t.course_name = ti.subject3 AND ti.subject3 IS NOT NULL AND ti.subject3 != '')
+           OR (t.course_name = ti.subject4 AND ti.subject4 IS NOT NULL AND ti.subject4 != '')
+           OR (t.course_name = ti.subject5 AND ti.subject5 IS NOT NULL AND ti.subject5 != '')
+           OR (t.course_name = ti.subject6 AND ti.subject6 IS NOT NULL AND ti.subject6 != '')
+           OR (t.course_name = ti.subject7 AND ti.subject7 IS NOT NULL AND ti.subject7 != '')
+           OR (t.course_name = ti.subject8 AND ti.subject8 IS NOT NULL AND ti.subject8 != '')
+           OR (t.course_name = ti.subject9 AND ti.subject9 IS NOT NULL AND ti.subject9 != '')
+           OR (t.course_name = ti.subject10 AND ti.subject10 IS NOT NULL AND ti.subject10 != '')
+        ORDER BY t.course_name ASC
+    </select>
+
+    <!-- 根据教师ID统计该教师教授学科的考试状态数量 -->
+    <select id="getExamStatusStatisticsByTeacherId" parameterType="java.lang.Integer" resultType="java.util.Map">
+        SELECT 
+            t.exam_status as status,
+            COUNT(*) as count
+        FROM test_information t
+        LEFT JOIN Course_information c ON t.course_id = c.course_id
+        LEFT JOIN teach_information ti ON ti.teacher_id = #{teacherId}
+        WHERE (t.course_name = ti.subject1 AND ti.subject1 IS NOT NULL AND ti.subject1 != '')
+           OR (t.course_name = ti.subject2 AND ti.subject2 IS NOT NULL AND ti.subject2 != '')
+           OR (t.course_name = ti.subject3 AND ti.subject3 IS NOT NULL AND ti.subject3 != '')
+           OR (t.course_name = ti.subject4 AND ti.subject4 IS NOT NULL AND ti.subject4 != '')
+           OR (t.course_name = ti.subject5 AND ti.subject5 IS NOT NULL AND ti.subject5 != '')
+           OR (t.course_name = ti.subject6 AND ti.subject6 IS NOT NULL AND ti.subject6 != '')
+           OR (t.course_name = ti.subject7 AND ti.subject7 IS NOT NULL AND ti.subject7 != '')
+           OR (t.course_name = ti.subject8 AND ti.subject8 IS NOT NULL AND ti.subject8 != '')
+           OR (t.course_name = ti.subject9 AND ti.subject9 IS NOT NULL AND ti.subject9 != '')
+           OR (t.course_name = ti.subject10 AND ti.subject10 IS NOT NULL AND ti.subject10 != '')
+        GROUP BY t.exam_status
+        ORDER BY 
+            CASE t.exam_status 
+                WHEN '未安排' THEN 1 
+                WHEN '已安排' THEN 2 
+                WHEN '已考试' THEN 3 
+                ELSE 4 
+            END
+    </select>
+
+</mapper>

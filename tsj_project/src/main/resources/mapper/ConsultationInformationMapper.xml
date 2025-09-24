@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tsj.Mapper.ConsultationInformationMapper">
+
+    <!-- 基础结果映射 -->
+    <resultMap id="BaseConsultationInformation" type="com.tsj.project.ConsultationInformation">
+        <id column="consultation_id" property="consultationId" />
+        <result column="student_id" property="studentId" />
+        <result column="teacher_id" property="teacherId" />
+        <result column="question" property="question" />
+        <result column="answer" property="answer" />
+        <result column="question_time" property="questionTime" />
+        <result column="answer_time" property="answerTime" />
+        <result column="status" property="status" />
+    </resultMap>
+
+    <!-- 扩展结果映射（包含用户信息） -->
+    <resultMap id="ExtendedConsultationInformation" type="com.tsj.project.ConsultationInformation">
+        <id column="consultation_id" property="consultationId" />
+        <result column="student_id" property="studentId" />
+        <result column="teacher_id" property="teacherId" />
+        <result column="question" property="question" />
+        <result column="answer" property="answer" />
+        <result column="question_time" property="questionTime" />
+        <result column="answer_time" property="answerTime" />
+        <result column="status" property="status" />
+        <result column="student_name" property="studentName" />
+        <result column="teacher_name" property="teacherName" />
+        <result column="student_avatar" property="studentAvatar" />
+        <result column="teacher_avatar" property="teacherAvatar" />
+    </resultMap>
+
+    <!-- 基础列列表 -->
+    <sql id="Base_Column_List">
+        consultation_id, student_id, teacher_id, question, answer, question_time, answer_time, status
+    </sql>
+
+    <!-- 扩展列列表（包含用户信息） -->
+    <sql id="Extended_Column_List">
+        ci.consultation_id, ci.student_id, ci.teacher_id, ci.question, ci.answer, 
+        ci.question_time, ci.answer_time, ci.status,
+        s.real_name as student_name, s.avatar as student_avatar,
+        t.real_name as teacher_name, t.avatar as teacher_avatar
+    </sql>
+
+    <!-- 插入新咨询 -->
+    <insert id="insertConsultation" parameterType="com.tsj.project.ConsultationInformation" useGeneratedKeys="true" keyProperty="consultationId">
+        INSERT INTO consultation_information 
+        (student_id, teacher_id, question, question_time, status)
+        VALUES 
+        (#{studentId}, #{teacherId}, #{question}, #{questionTime}, #{status})
+    </insert>
+
+    <!-- 根据教师ID获取咨询列表 -->
+    <select id="getConsultationsByTeacherId" parameterType="java.lang.Integer" resultMap="ExtendedConsultationInformation">
+        SELECT 
+        <include refid="Extended_Column_List" />
+        FROM consultation_information ci
+        LEFT JOIN sys_user s ON ci.student_id = s.id
+        LEFT JOIN sys_user t ON ci.teacher_id = t.id
+        WHERE ci.teacher_id = #{teacherId}
+        ORDER BY ci.question_time DESC
+    </select>
+
+    <!-- 根据学生ID获取咨询列表 -->
+    <select id="getConsultationsByStudentId" parameterType="java.lang.Integer" resultMap="ExtendedConsultationInformation">
+        SELECT 
+        <include refid="Extended_Column_List" />
+        FROM consultation_information ci
+        LEFT JOIN sys_user s ON ci.student_id = s.id
+        LEFT JOIN sys_user t ON ci.teacher_id = t.id
+        WHERE ci.student_id = #{studentId}
+        ORDER BY ci.question_time DESC
+    </select>
+
+    <!-- 更新回答 -->
+    <update id="updateAnswer">
+        UPDATE consultation_information 
+        SET answer = #{answer}, answer_time = NOW(), status = 1
+        WHERE consultation_id = #{consultationId}
+    </update>
+
+    <!-- 根据ID获取咨询记录 -->
+    <select id="getConsultationById" parameterType="java.lang.Integer" resultMap="ExtendedConsultationInformation">
+        SELECT 
+        <include refid="Extended_Column_List" />
+        FROM consultation_information ci
+        LEFT JOIN sys_user s ON ci.student_id = s.id
+        LEFT JOIN sys_user t ON ci.teacher_id = t.id
+        WHERE ci.consultation_id = #{consultationId}
+    </select>
+
+    <!-- 获取教师待回答咨询数量 -->
+    <select id="getPendingConsultationCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT COUNT(*) 
+        FROM consultation_information 
+        WHERE teacher_id = #{teacherId} AND status = 0
+    </select>
+
+</mapper>
