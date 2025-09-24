@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tsj.Mapper.TextbookInformationMapper">
+
+    <!-- 结果映射 -->
+    <resultMap id="TextbookInformationResultMap" type="com.tsj.project.TextbookInformation">
+        <id property="textbookId" column="textbook_id"/>
+        <result property="textbookName" column="textbook_name"/>
+        <result property="textbookAuthor" column="textbook_author"/>
+        <result property="textbookVersion" column="textbook_version"/>
+        <result property="textbookPublisher" column="textbook_publisher"/>
+        <result property="textbookImageUrl" column="textbook_image_url"/>
+        <result property="downloadUrl" column="download_url"/>
+    </resultMap>
+
+    <!-- 创建教材信息 -->
+    <insert id="createTextbook" parameterType="com.tsj.project.TextbookInformation" useGeneratedKeys="true" keyProperty="textbookId">
+        INSERT INTO textbook_information (
+            textbook_name, 
+            textbook_author, 
+            textbook_version, 
+            textbook_publisher, 
+            textbook_image_url, 
+            download_url
+        ) VALUES (
+            #{textbookName}, 
+            #{textbookAuthor}, 
+            #{textbookVersion}, 
+            #{textbookPublisher}, 
+            #{textbookImageUrl}, 
+            #{downloadUrl}
+        )
+    </insert>
+
+    <!-- 根据ID获取教材信息 -->
+    <select id="getTextbookById" parameterType="java.lang.Integer" resultMap="TextbookInformationResultMap">
+        SELECT * FROM textbook_information WHERE textbook_id = #{textbookId}
+    </select>
+
+    <!-- 获取所有教材信息 -->
+    <select id="getAllTextbooks" resultMap="TextbookInformationResultMap">
+        SELECT * FROM textbook_information ORDER BY textbook_id DESC
+    </select>
+
+    <!-- 更新教材信息 -->
+    <update id="updateTextbook" parameterType="com.tsj.project.TextbookInformation">
+        UPDATE textbook_information SET
+            textbook_name = #{textbookName},
+            textbook_author = #{textbookAuthor},
+            textbook_version = #{textbookVersion},
+            textbook_publisher = #{textbookPublisher},
+            textbook_image_url = #{textbookImageUrl},
+            download_url = #{downloadUrl}
+        WHERE textbook_id = #{textbookId}
+    </update>
+
+    <!-- 删除教材信息 -->
+    <delete id="deleteTextbook" parameterType="java.lang.Integer">
+        DELETE FROM textbook_information WHERE textbook_id = #{textbookId}
+    </delete>
+
+    <!-- 根据教材名搜索教材 -->
+    <select id="searchTextbooksByName" parameterType="java.lang.String" resultMap="TextbookInformationResultMap">
+        SELECT * FROM textbook_information 
+        WHERE textbook_name LIKE #{textbookName}
+        ORDER BY textbook_id DESC
+    </select>
+
+    <!-- 根据作者搜索教材 -->
+    <select id="searchTextbooksByAuthor" parameterType="java.lang.String" resultMap="TextbookInformationResultMap">
+        SELECT * FROM textbook_information 
+        WHERE textbook_author LIKE #{author}
+        ORDER BY textbook_id DESC
+    </select>
+
+    <!-- 根据出版社搜索教材 -->
+    <select id="searchTextbooksByPublisher" parameterType="java.lang.String" resultMap="TextbookInformationResultMap">
+        SELECT * FROM textbook_information 
+        WHERE textbook_publisher LIKE #{publisher}
+        ORDER BY textbook_id DESC
+    </select>
+
+    <!-- 获取教材总数 -->
+    <select id="getTextbookCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM textbook_information
+    </select>
+
+    <!-- 分页获取教材信息 -->
+    <select id="getTextbooksWithPagination" resultMap="TextbookInformationResultMap">
+        SELECT * FROM textbook_information 
+        ORDER BY textbook_id DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+</mapper>

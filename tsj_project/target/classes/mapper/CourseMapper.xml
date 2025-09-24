@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tsj.Mapper.CourseMapper">
+
+    <resultMap id="BaseCourse" type="com.tsj.project.Course">
+        <id property="courseId" column="course_id" jdbcType="BIGINT"></id>
+        <result property="courseCode" column="course_code" jdbcType="VARCHAR"></result>
+        <result property="courseName" column="course_name" jdbcType="VARCHAR"></result>
+        <result property="courseType" column="course_type" jdbcType="VARCHAR"></result>
+        <result property="courseNature" column="course_nature" jdbcType="VARCHAR"></result>
+        <result property="credit" column="credit" jdbcType="DECIMAL"></result>
+        <result property="semester" column="semester" jdbcType="TINYINT"></result>
+        <result property="college" column="college" jdbcType="VARCHAR"></result>
+    </resultMap>
+
+    <!-- 获取所有课程 -->
+    <select id="getCourse" resultMap="BaseCourse">
+        SELECT * FROM Course_information ORDER BY course_type, semester, course_code
+    </select>
+
+    <!-- 插入课程 -->
+    <insert id="insertCourse" parameterType="com.tsj.project.Course">
+        INSERT INTO Course_information(course_code, course_name, course_type, course_nature, credit, semester, college)
+        VALUES(#{courseCode}, #{courseName}, #{courseType}, #{courseNature}, #{credit}, #{semester}, #{college})
+    </insert>
+
+    <!-- 更新课程 -->
+    <update id="updateCourse" parameterType="com.tsj.project.Course">
+        UPDATE Course_information SET 
+        course_code = #{courseCode},
+        course_name = #{courseName},
+        course_type = #{courseType},
+        course_nature = #{courseNature},
+        credit = #{credit},
+        semester = #{semester},
+        college = #{college}
+        WHERE course_id = #{courseId}
+    </update>
+
+    <!-- 删除课程 -->
+    <delete id="deleteCourse" parameterType="java.lang.Long">
+        DELETE FROM Course_information WHERE course_id = #{courseId}
+    </delete>
+
+    <!-- 根据ID获取课程 -->
+    <select id="getCourseById" parameterType="java.lang.Long" resultMap="BaseCourse">
+        SELECT * FROM Course_information WHERE course_id = #{courseId}
+    </select>
+
+    <!-- 根据课程代码获取课程 -->
+    <select id="getCourseByCourseCode" parameterType="java.lang.String" resultMap="BaseCourse">
+        SELECT * FROM Course_information WHERE course_code = #{courseCode}
+    </select>
+
+    <!-- 根据课程类型获取课程 -->
+    <select id="getCoursesByType" parameterType="java.lang.String" resultMap="BaseCourse">
+        SELECT * FROM Course_information WHERE course_type = #{courseType} ORDER BY semester, course_code
+    </select>
+
+    <!-- 根据课程性质获取课程 -->
+    <select id="getCoursesByNature" parameterType="java.lang.String" resultMap="BaseCourse">
+        SELECT * FROM Course_information WHERE course_nature = #{courseNature} ORDER BY course_type, semester
+    </select>
+
+    <!-- 根据学期获取课程 -->
+    <select id="getCoursesBySemester" parameterType="java.lang.Integer" resultMap="BaseCourse">
+        SELECT * FROM Course_information WHERE semester = #{semester} ORDER BY course_type, course_code
+    </select>
+
+    <!-- 根据学院获取课程 -->
+    <select id="getCoursesByCollege" parameterType="java.lang.String" resultMap="BaseCourse">
+        SELECT * FROM Course_information WHERE college = #{college} ORDER BY course_type, semester
+    </select>
+
+    <!-- 根据学分范围获取课程 -->
+    <select id="getCoursesByCreditRange" resultMap="BaseCourse">
+        <![CDATA[
+        SELECT * FROM Course_information 
+        WHERE credit >= #{minCredit} AND credit <= #{maxCredit} 
+        ORDER BY credit DESC, course_type
+        ]]>
+    </select>
+
+</mapper>

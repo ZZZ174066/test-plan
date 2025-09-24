@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tsj.Mapper.UserMapper">
+
+    <resultMap id="BaseUser" type="com.tsj.project.User">
+        <id property="id" column="id" jdbcType="BIGINT"></id>
+        <result property="username" column="username" jdbcType="VARCHAR"></result>
+        <result property="password" column="password" jdbcType="VARCHAR"></result>
+        <result property="realName" column="real_name" jdbcType="VARCHAR"></result>
+        <result property="phone" column="phone" jdbcType="VARCHAR"></result>
+        <result property="userType" column="user_type" jdbcType="TINYINT"></result>
+        <result property="avatar" column="avatar" jdbcType="CLOB"></result>
+        <result property="onlineStatus" column="online_status" jdbcType="TINYINT"></result>
+        <result property="email" column="email" jdbcType="VARCHAR"></result>
+    </resultMap>
+
+    <select id="getUser" resultMap="BaseUser">
+        select * from sys_user
+    </select>
+
+    <insert id="insertUser" parameterType="com.tsj.project.User">
+        insert into sys_user(username, password, real_name, phone, user_type, avatar, online_status, email)
+        values(#{username}, #{password}, #{realName}, #{phone}, #{userType}, 
+               #{avatar, jdbcType=CLOB}, #{onlineStatus, jdbcType=TINYINT}, #{email, jdbcType=VARCHAR})
+    </insert>
+
+    <update id="updateUser" parameterType="com.tsj.project.User">
+        update sys_user set 
+        username = #{username},
+        password = #{password},
+        real_name = #{realName},
+        phone = #{phone},
+        user_type = #{userType},
+        avatar = #{avatar, jdbcType=CLOB},
+        online_status = #{onlineStatus, jdbcType=TINYINT},
+        email = #{email, jdbcType=VARCHAR}
+        where id = #{id}
+    </update>
+
+    <update id="updateOnlineStatus" parameterType="map">
+        update sys_user set online_status = #{status} where id = #{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="java.lang.Long">
+        delete from sys_user where id = #{id}
+    </delete>
+
+    <select id="getUser2" parameterType="java.lang.Long" resultMap="BaseUser">
+        select * from sys_user where id=#{id}
+    </select>
+    
+    <select id="getUserByUsername" parameterType="java.lang.String" resultMap="BaseUser">
+        select * from sys_user where username=#{username}
+    </select>
+
+</mapper>

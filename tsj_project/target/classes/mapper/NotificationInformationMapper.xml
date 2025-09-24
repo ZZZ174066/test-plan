@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tsj.Mapper.NotificationInformationMapper">
+
+    <resultMap id="BaseNotification" type="com.tsj.project.NotificationInformation">
+        <id property="notificationId" column="notification_id" jdbcType="INTEGER"></id>
+        <result property="notificationSubject" column="notification_subject" jdbcType="VARCHAR"></result>
+        <result property="notificationCourse" column="notification_course" jdbcType="VARCHAR"></result>
+        <result property="notificationContent" column="notification_content" jdbcType="LONGVARCHAR"></result>
+        <result property="publishDate" column="publish_date" jdbcType="DATE"></result>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"></result>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"></result>
+    </resultMap>
+
+    <!-- 获取所有通知信息 -->
+    <select id="getAllNotifications" resultMap="BaseNotification">
+        SELECT * FROM notification_information 
+        ORDER BY publish_date DESC, created_at DESC
+    </select>
+
+    <!-- 根据ID获取通知信息 -->
+    <select id="getNotificationById" parameterType="java.lang.Integer" resultMap="BaseNotification">
+        SELECT * FROM notification_information 
+        WHERE notification_id = #{notificationId}
+    </select>
+
+    <!-- 根据学科获取通知信息 -->
+    <select id="getNotificationsByCourse" parameterType="java.lang.String" resultMap="BaseNotification">
+        SELECT * FROM notification_information 
+        WHERE notification_course = #{course} 
+        ORDER BY publish_date DESC, created_at DESC
+    </select>
+
+    <!-- 插入新通知信息 -->
+    <insert id="insertNotification" parameterType="com.tsj.project.NotificationInformation" useGeneratedKeys="true" keyProperty="notificationId">
+        INSERT INTO notification_information (
+            notification_subject, 
+            notification_course, 
+            notification_content, 
+            publish_date
+        ) VALUES (
+            #{notificationSubject}, 
+            #{notificationCourse}, 
+            #{notificationContent}, 
+            #{publishDate}
+        )
+    </insert>
+
+    <!-- 更新通知信息 -->
+    <update id="updateNotification" parameterType="com.tsj.project.NotificationInformation">
+        UPDATE notification_information SET 
+            notification_subject = #{notificationSubject},
+            notification_course = #{notificationCourse},
+            notification_content = #{notificationContent},
+            publish_date = #{publishDate}
+        WHERE notification_id = #{notificationId}
+    </update>
+
+    <!-- 删除通知信息 -->
+    <delete id="deleteNotification" parameterType="java.lang.Integer">
+        DELETE FROM notification_information 
+        WHERE notification_id = #{notificationId}
+    </delete>
+
+    <!-- 获取最近的通知信息（限制数量） -->
+    <select id="getRecentNotifications" parameterType="java.lang.Integer" resultMap="BaseNotification">
+        SELECT * FROM notification_information 
+        ORDER BY publish_date DESC, created_at DESC 
+        LIMIT #{limit}
+    </select>
+
+    <!-- 根据关键词搜索通知信息 -->
+    <select id="searchNotifications" parameterType="java.lang.String" resultMap="BaseNotification">
+        SELECT * FROM notification_information 
+        WHERE notification_subject LIKE CONCAT('%', #{keyword}, '%') 
+           OR notification_content LIKE CONCAT('%', #{keyword}, '%') 
+           OR notification_course LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY publish_date DESC, created_at DESC
+    </select>
+
+    <!-- 根据日期范围获取通知信息 -->
+    <select id="getNotificationsByDateRange" resultMap="BaseNotification">
+        <![CDATA[
+        SELECT * FROM notification_information 
+        WHERE publish_date >= #{startDate} AND publish_date <= #{endDate}
+        ORDER BY publish_date DESC, created_at DESC
+        ]]>
+    </select>
+
+    <!-- 获取通知统计信息 -->
+    <select id="getNotificationStats" resultType="java.util.Map">
+        SELECT 
+            COUNT(*) as total_count,
+            COUNT(DISTINCT notification_course) as course_count,
+            DATE(MIN(publish_date)) as earliest_date,
+            DATE(MAX(publish_date)) as latest_date
+        FROM notification_information
+    </select>
+
+    <!-- 根据学科统计通知数量 -->
+    <select id="getNotificationCountByCourse" resultType="java.util.Map">
+        SELECT 
+            notification_course as course_name,
+            COUNT(*) as notification_count
+        FROM notification_information 
+        GROUP BY notification_course 
+        ORDER BY notification_count DESC
+    </select>
+
+    <!-- 获取今日发布的通知 -->
+    <select id="getTodayNotifications" resultMap="BaseNotification">
+        SELECT * FROM notification_information 
+        WHERE DATE(publish_date) = CURDATE()
+        ORDER BY created_at DESC
+    </select>
+
+    <!-- 获取本周发布的通知 -->
+    <select id="getWeeklyNotifications" resultMap="BaseNotification">
+        <![CDATA[
+        SELECT * FROM notification_information 
+        WHERE publish_date >= DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY)
+          AND publish_date < DATE_ADD(DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY), INTERVAL 7 DAY)
+        ORDER BY publish_date DESC, created_at DESC
+        ]]>
+    </select>
+
+    <!-- 批量插入通知信息 -->
+    <insert id="batchInsertNotifications" parameterType="java.util.List">
+        INSERT INTO notification_information (
+            notification_subject, 
+            notification_course, 
+            notification_content, 
+            publish_date
+        ) VALUES
+        <foreach collection="list" item="notification" separator=",">
+            (
+                #{notification.notificationSubject}, 
+                #{notification.notificationCourse}, 
+                #{notification.notificationContent}, 
+                #{notification.publishDate}
+            )
+        </foreach>
+    </insert>
+
+    <!-- 批量删除通知信息 -->
+    <delete id="batchDeleteNotifications" parameterType="java.util.List">
+        DELETE FROM notification_information 
+        WHERE notification_id IN
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

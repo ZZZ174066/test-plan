@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tsj.Mapper.StudentGradesMapper">
+
+    <resultMap id="BaseStudentGrades" type="com.tsj.project.StudentGrades">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <!-- 思想政治类课程成绩 -->
+        <result property="思想道德与法治" column="思想道德与法治" jdbcType="DECIMAL"/>
+        <result property="中国近现代史纲要" column="中国近现代史纲要" jdbcType="DECIMAL"/>
+        <result property="马克思主义基本原理" column="马克思主义基本原理" jdbcType="DECIMAL"/>
+        <result property="毛泽东思想和中国特色社会主义理论体系概论" column="毛泽东思想和中国特色社会主义理论体系概论" jdbcType="DECIMAL"/>
+        <result property="习近平新时代中国特色社会主义思想概论" column="习近平新时代中国特色社会主义思想概论" jdbcType="DECIMAL"/>
+        <result property="形势与政策Ⅰ" column="形势与政策Ⅰ" jdbcType="DECIMAL"/>
+        <result property="形势与政策Ⅱ" column="形势与政策Ⅱ" jdbcType="DECIMAL"/>
+        <result property="形势与政策Ⅲ" column="形势与政策Ⅲ" jdbcType="DECIMAL"/>
+        <result property="形势与政策Ⅳ" column="形势与政策Ⅳ" jdbcType="DECIMAL"/>
+        <result property="形势与政策V" column="形势与政策V" jdbcType="DECIMAL"/>
+        <result property="形势与政策VⅠ" column="形势与政策VⅠ" jdbcType="DECIMAL"/>
+        <result property="形势与政策VⅡ" column="形势与政策VⅡ" jdbcType="DECIMAL"/>
+        <result property="形势与政策VⅢ" column="形势与政策VⅢ" jdbcType="DECIMAL"/>
+        <!-- 核心通识课程成绩 -->
+        <result property="智能加交通" column="智能加交通" jdbcType="DECIMAL"/>
+        <result property="区块链技术及应用" column="区块链技术及应用" jdbcType="DECIMAL"/>
+        <result property="现代铁路信息技术" column="现代铁路信息技术" jdbcType="DECIMAL"/>
+        <!-- 军事类课程成绩 -->
+        <result property="军事理论" column="军事理论" jdbcType="DECIMAL"/>
+        <result property="军事技能" column="军事技能" jdbcType="DECIMAL"/>
+        <!-- 体育类课程成绩 -->
+        <result property="体育Ⅰ" column="体育Ⅰ" jdbcType="DECIMAL"/>
+        <result property="体育Ⅱ" column="体育Ⅱ" jdbcType="DECIMAL"/>
+        <result property="体育Ⅲ" column="体育Ⅲ" jdbcType="DECIMAL"/>
+        <result property="体育Ⅳ" column="体育Ⅳ" jdbcType="DECIMAL"/>
+        <result property="体育健康课程Ⅰ" column="体育健康课程Ⅰ" jdbcType="DECIMAL"/>
+        <result property="体育健康课程Ⅱ" column="体育健康课程Ⅱ" jdbcType="DECIMAL"/>
+        <!-- 外语类课程成绩 -->
+        <result property="英语Ⅰ" column="英语Ⅰ" jdbcType="DECIMAL"/>
+        <result property="英语Ⅱ" column="英语Ⅱ" jdbcType="DECIMAL"/>
+        <result property="通用学术英语" column="通用学术英语" jdbcType="DECIMAL"/>
+        <result property="职场英语" column="职场英语" jdbcType="DECIMAL"/>
+        <result property="交际与文化视听说" column="交际与文化视听说" jdbcType="DECIMAL"/>
+        <result property="语言文化与翻译" column="语言文化与翻译" jdbcType="DECIMAL"/>
+        <result property="英语公共演讲" column="英语公共演讲" jdbcType="DECIMAL"/>
+        <!-- 新生研讨课成绩 -->
+        <result property="计算机学科前沿导论" column="计算机学科前沿导论" jdbcType="DECIMAL"/>
+        <result property="软件学科前沿导论" column="软件学科前沿导论" jdbcType="DECIMAL"/>
+        <!-- 数学与自然科学成绩 -->
+        <result property="高等数学Ⅰ" column="高等数学Ⅰ" jdbcType="DECIMAL"/>
+        <result property="高等数学Ⅱ" column="高等数学Ⅱ" jdbcType="DECIMAL"/>
+        <result property="线性代数B" column="线性代数B" jdbcType="DECIMAL"/>
+        <result property="概率论与数理统计" column="概率论与数理统计" jdbcType="DECIMAL"/>
+        <result property="离散数学" column="离散数学" jdbcType="DECIMAL"/>
+        <result property="大学物理BⅠ" column="大学物理BⅠ" jdbcType="DECIMAL"/>
+        <result property="大学物理BⅡ" column="大学物理BⅡ" jdbcType="DECIMAL"/>
+        <result property="大学物理实验Ⅰ" column="大学物理实验Ⅰ" jdbcType="DECIMAL"/>
+        <result property="大学物理实验Ⅱ" column="大学物理实验Ⅱ" jdbcType="DECIMAL"/>
+        <!-- 专业基础课成绩 -->
+        <result property="高级语言程序设计" column="高级语言程序设计" jdbcType="DECIMAL"/>
+        <result property="面向对象程序设计" column="面向对象程序设计" jdbcType="DECIMAL"/>
+        <result property="数字电子技术B" column="数字电子技术B" jdbcType="DECIMAL"/>
+        <result property="数字电子技术实验" column="数字电子技术实验" jdbcType="DECIMAL"/>
+        <result property="数据结构A" column="数据结构A" jdbcType="DECIMAL"/>
+        <result property="数据结构实验" column="数据结构实验" jdbcType="DECIMAL"/>
+        <result property="计算机组成原理B" column="计算机组成原理B" jdbcType="DECIMAL"/>
+        <result property="计算机组成实验" column="计算机组成实验" jdbcType="DECIMAL"/>
+        <!-- 专业核心课程成绩 -->
+        <result property="算法分析与设计B" column="算法分析与设计B" jdbcType="DECIMAL"/>
+        <result property="算法分析与设计实验" column="算法分析与设计实验" jdbcType="DECIMAL"/>
+        <result property="数据库原理" column="数据库原理" jdbcType="DECIMAL"/>
+        <result property="数据库原理实验" column="数据库原理实验" jdbcType="DECIMAL"/>
+        <result property="操作系统" column="操作系统" jdbcType="DECIMAL"/>
+        <result property="操作系统实验" column="操作系统实验" jdbcType="DECIMAL"/>
+        <result property="软件工程" column="软件工程" jdbcType="DECIMAL"/>
+        <result property="计算机网络" column="计算机网络" jdbcType="DECIMAL"/>
+        <result property="计算机网络工程实验" column="计算机网络工程实验" jdbcType="DECIMAL"/>
+        <!-- 专业限修课程成绩 -->
+        <result property="软件系统分析与设计" column="软件系统分析与设计" jdbcType="DECIMAL"/>
+        <result property="编译原理" column="编译原理" jdbcType="DECIMAL"/>
+        <result property="人机交互技术" column="人机交互技术" jdbcType="DECIMAL"/>
+        <result property="人机交互技术实验" column="人机交互技术实验" jdbcType="DECIMAL"/>
+        <result property="新技术讲座" column="新技术讲座" jdbcType="DECIMAL"/>
+        <result property="软件项目管理" column="软件项目管理" jdbcType="DECIMAL"/>
+        <result property="计算机图形学" column="计算机图形学" jdbcType="DECIMAL"/>
+        <result property="计算机图形学实验" column="计算机图形学实验" jdbcType="DECIMAL"/>
+        <result property="软件质量保证与测试" column="软件质量保证与测试" jdbcType="DECIMAL"/>
+        <result property="软件综合课程设计" column="软件综合课程设计" jdbcType="DECIMAL"/>
+        <!-- 跨学科课程成绩 -->
+        <result property="Java开发技术" column="Java开发技术" jdbcType="DECIMAL"/>
+        <result property="Linux内核分析" column="Linux内核分析" jdbcType="DECIMAL"/>
+        <result property="软件设计模式" column="软件设计模式" jdbcType="DECIMAL"/>
+        <result property="软件设计模式实验" column="软件设计模式实验" jdbcType="DECIMAL"/>
+        <result property="数据挖掘" column="数据挖掘" jdbcType="DECIMAL"/>
+        <result property="人工智能" column="人工智能" jdbcType="DECIMAL"/>
+        <result property="云计算与并行技术" column="云计算与并行技术" jdbcType="DECIMAL"/>
+        <result property="幸福心理学" column="幸福心理学" jdbcType="DECIMAL"/>
+        <result property="信息检索" column="信息检索" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <!-- 获取所有学生成绩信息 -->
+    <select id="getAllStudentGrades" resultMap="BaseStudentGrades">
+        SELECT * FROM student_grades
+    </select>
+
+    <!-- 根据用户ID获取学生成绩信息 -->
+    <select id="getStudentGradesById" parameterType="java.lang.Integer" resultMap="BaseStudentGrades">
+        SELECT * FROM student_grades WHERE id = #{id}
+    </select>
+
+    <!-- 插入学生成绩信息 -->
+    <insert id="insertStudentGrades" parameterType="com.tsj.project.StudentGrades">
+        INSERT INTO student_grades (id) VALUES (#{id})
+    </insert>
+
+    <!-- 更新学生成绩信息 -->
+    <update id="updateStudentGrades" parameterType="com.tsj.project.StudentGrades">
+        UPDATE student_grades SET
+        `思想道德与法治` = #{思想道德与法治},
+        `中国近现代史纲要` = #{中国近现代史纲要},
+        `马克思主义基本原理` = #{马克思主义基本原理},
+        `毛泽东思想和中国特色社会主义理论体系概论` = #{毛泽东思想和中国特色社会主义理论体系概论},
+        `习近平新时代中国特色社会主义思想概论` = #{习近平新时代中国特色社会主义思想概论},
+        `形势与政策Ⅰ` = #{形势与政策Ⅰ},
+        `形势与政策Ⅱ` = #{形势与政策Ⅱ},
+        `形势与政策Ⅲ` = #{形势与政策Ⅲ},
+        `形势与政策Ⅳ` = #{形势与政策Ⅳ},
+        `形势与政策V` = #{形势与政策V},
+        `形势与政策VⅠ` = #{形势与政策VⅠ},
+        `形势与政策VⅡ` = #{形势与政策VⅡ},
+        `形势与政策VⅢ` = #{形势与政策VⅢ},
+        `智能加交通` = #{智能加交通},
+        `区块链技术及应用` = #{区块链技术及应用},
+        `现代铁路信息技术` = #{现代铁路信息技术},
+        `军事理论` = #{军事理论},
+        `军事技能` = #{军事技能},
+        `体育Ⅰ` = #{体育Ⅰ},
+        `体育Ⅱ` = #{体育Ⅱ},
+        `体育Ⅲ` = #{体育Ⅲ},
+        `体育Ⅳ` = #{体育Ⅳ},
+        `体育健康课程Ⅰ` = #{体育健康课程Ⅰ},
+        `体育健康课程Ⅱ` = #{体育健康课程Ⅱ},
+        `英语Ⅰ` = #{英语Ⅰ},
+        `英语Ⅱ` = #{英语Ⅱ},
+        `通用学术英语` = #{通用学术英语},
+        `职场英语` = #{职场英语},
+        `交际与文化视听说` = #{交际与文化视听说},
+        `语言文化与翻译` = #{语言文化与翻译},
+        `英语公共演讲` = #{英语公共演讲},
+        `计算机学科前沿导论` = #{计算机学科前沿导论},
+        `软件学科前沿导论` = #{软件学科前沿导论},
+        `高等数学Ⅰ` = #{高等数学Ⅰ},
+        `高等数学Ⅱ` = #{高等数学Ⅱ},
+        `线性代数B` = #{线性代数B},
+        `概率论与数理统计` = #{概率论与数理统计},
+        `离散数学` = #{离散数学},
+        `大学物理BⅠ` = #{大学物理BⅠ},
+        `大学物理BⅡ` = #{大学物理BⅡ},
+        `大学物理实验Ⅰ` = #{大学物理实验Ⅰ},
+        `大学物理实验Ⅱ` = #{大学物理实验Ⅱ},
+        `高级语言程序设计` = #{高级语言程序设计},
+        `面向对象程序设计` = #{面向对象程序设计},
+        `数字电子技术B` = #{数字电子技术B},
+        `数字电子技术实验` = #{数字电子技术实验},
+        `数据结构A` = #{数据结构A},
+        `数据结构实验` = #{数据结构实验},
+        `计算机组成原理B` = #{计算机组成原理B},
+        `计算机组成实验` = #{计算机组成实验},
+        `算法分析与设计B` = #{算法分析与设计B},
+        `算法分析与设计实验` = #{算法分析与设计实验},
+        `数据库原理` = #{数据库原理},
+        `数据库原理实验` = #{数据库原理实验},
+        `操作系统` = #{操作系统},
+        `操作系统实验` = #{操作系统实验},
+        `软件工程` = #{软件工程},
+        `计算机网络` = #{计算机网络},
+        `计算机网络工程实验` = #{计算机网络工程实验},
+        `软件系统分析与设计` = #{软件系统分析与设计},
+        `编译原理` = #{编译原理},
+        `人机交互技术` = #{人机交互技术},
+        `人机交互技术实验` = #{人机交互技术实验},
+        `新技术讲座` = #{新技术讲座},
+        `软件项目管理` = #{软件项目管理},
+        `计算机图形学` = #{计算机图形学},
+        `计算机图形学实验` = #{计算机图形学实验},
+        `软件质量保证与测试` = #{软件质量保证与测试},
+        `软件综合课程设计` = #{软件综合课程设计},
+        `Java开发技术` = #{Java开发技术},
+        `Linux内核分析` = #{Linux内核分析},
+        `软件设计模式` = #{软件设计模式},
+        `软件设计模式实验` = #{软件设计模式实验},
+        `数据挖掘` = #{数据挖掘},
+        `人工智能` = #{人工智能},
+        `云计算与并行技术` = #{云计算与并行技术},
+        `幸福心理学` = #{幸福心理学},
+        `信息检索` = #{信息检索}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除学生成绩信息 -->
+    <delete id="deleteStudentGrades" parameterType="java.lang.Integer">
+        DELETE FROM student_grades WHERE id = #{id}
+    </delete>
+
+    <!-- 更新单个课程的成绩 -->
+    <update id="updateCourseGrade">
+        UPDATE student_grades 
+        SET `${courseName}` = #{grade}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 获取教师教授且已考试的学科列表 -->
+    <select id="getTeacherExaminedSubjects" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT DISTINCT subject_name
+        FROM (
+            SELECT ti.subject1 as subject_name FROM teach_information ti 
+            WHERE ti.teacher_id = #{teacherId} AND ti.subject1 IS NOT NULL
+            UNION ALL
+            SELECT ti.subject2 as subject_name FROM teach_information ti 
+            WHERE ti.teacher_id = #{teacherId} AND ti.subject2 IS NOT NULL
+            UNION ALL
+            SELECT ti.subject3 as subject_name FROM teach_information ti 
+            WHERE ti.teacher_id = #{teacherId} AND ti.subject3 IS NOT NULL
+            UNION ALL
+            SELECT ti.subject4 as subject_name FROM teach_information ti 
+            WHERE ti.teacher_id = #{teacherId} AND ti.subject4 IS NOT NULL
+            UNION ALL
+            SELECT ti.subject5 as subject_name FROM teach_information ti 
+            WHERE ti.teacher_id = #{teacherId} AND ti.subject5 IS NOT NULL
+            UNION ALL
+            SELECT ti.subject6 as subject_name FROM teach_information ti 
+            WHERE ti.teacher_id = #{teacherId} AND ti.subject6 IS NOT NULL
+            UNION ALL
+            SELECT ti.subject7 as subject_name FROM teach_information ti 
+            WHERE ti.teacher_id = #{teacherId} AND ti.subject7 IS NOT NULL
+            UNION ALL
+            SELECT ti.subject8 as subject_name FROM teach_information ti 
+            WHERE ti.teacher_id = #{teacherId} AND ti.subject8 IS NOT NULL
+            UNION ALL
+            SELECT ti.subject9 as subject_name FROM teach_information ti 
+            WHERE ti.teacher_id = #{teacherId} AND ti.subject9 IS NOT NULL
+            UNION ALL
+            SELECT ti.subject10 as subject_name FROM teach_information ti 
+            WHERE ti.teacher_id = #{teacherId} AND ti.subject10 IS NOT NULL
+        ) AS teacher_subjects
+        WHERE subject_name IN (
+            SELECT course_name FROM test_information WHERE exam_status = '已考试'
+        )
+        ORDER BY subject_name
+    </select>
+
+    <!-- 获取指定学科的学生成绩列表 -->
+    <select id="getStudentGradesBySubject" resultType="java.util.Map">
+        SELECT 
+            sg.id AS studentId,
+            u.real_name AS studentName,
+            <choose>
+                <when test="subject == '思想道德与法治'">sg.`思想道德与法治` AS grade</when>
+                <when test="subject == '中国近现代史纲要'">sg.`中国近现代史纲要` AS grade</when>
+                <when test="subject == '马克思主义基本原理'">sg.`马克思主义基本原理` AS grade</when>
+                <when test="subject == '毛泽东思想和中国特色社会主义理论体系概论'">sg.`毛泽东思想和中国特色社会主义理论体系概论` AS grade</when>
+                <when test="subject == '习近平新时代中国特色社会主义思想概论'">sg.`习近平新时代中国特色社会主义思想概论` AS grade</when>
+                <when test="subject == '形势与政策Ⅰ'">sg.`形势与政策Ⅰ` AS grade</when>
+                <when test="subject == '形势与政策Ⅱ'">sg.`形势与政策Ⅱ` AS grade</when>
+                <when test="subject == '形势与政策Ⅲ'">sg.`形势与政策Ⅲ` AS grade</when>
+                <when test="subject == '形势与政策Ⅳ'">sg.`形势与政策Ⅳ` AS grade</when>
+                <when test="subject == '形势与政策V'">sg.`形势与政策V` AS grade</when>
+                <when test="subject == '形势与政策VⅠ'">sg.`形势与政策VⅠ` AS grade</when>
+                <when test="subject == '形势与政策VⅡ'">sg.`形势与政策VⅡ` AS grade</when>
+                <when test="subject == '形势与政策VⅢ'">sg.`形势与政策VⅢ` AS grade</when>
+                <when test="subject == '智能加交通'">sg.`智能加交通` AS grade</when>
+                <when test="subject == '区块链技术及应用'">sg.`区块链技术及应用` AS grade</when>
+                <when test="subject == '现代铁路信息技术'">sg.`现代铁路信息技术` AS grade</when>
+                <when test="subject == '军事理论'">sg.`军事理论` AS grade</when>
+                <when test="subject == '军事技能'">sg.`军事技能` AS grade</when>
+                <when test="subject == '体育Ⅰ'">sg.`体育Ⅰ` AS grade</when>
+                <when test="subject == '体育Ⅱ'">sg.`体育Ⅱ` AS grade</when>
+                <when test="subject == '体育Ⅲ'">sg.`体育Ⅲ` AS grade</when>
+                <when test="subject == '体育Ⅳ'">sg.`体育Ⅳ` AS grade</when>
+                <when test="subject == '体育健康课程Ⅰ'">sg.`体育健康课程Ⅰ` AS grade</when>
+                <when test="subject == '体育健康课程Ⅱ'">sg.`体育健康课程Ⅱ` AS grade</when>
+                <when test="subject == '英语Ⅰ'">sg.`英语Ⅰ` AS grade</when>
+                <when test="subject == '英语Ⅱ'">sg.`英语Ⅱ` AS grade</when>
+                <when test="subject == '通用学术英语'">sg.`通用学术英语` AS grade</when>
+                <when test="subject == '职场英语'">sg.`职场英语` AS grade</when>
+                <when test="subject == '交际与文化视听说'">sg.`交际与文化视听说` AS grade</when>
+                <when test="subject == '语言文化与翻译'">sg.`语言文化与翻译` AS grade</when>
+                <when test="subject == '英语公共演讲'">sg.`英语公共演讲` AS grade</when>
+                <when test="subject == '计算机学科前沿导论'">sg.`计算机学科前沿导论` AS grade</when>
+                <when test="subject == '软件学科前沿导论'">sg.`软件学科前沿导论` AS grade</when>
+                <when test="subject == '高等数学Ⅰ'">sg.`高等数学Ⅰ` AS grade</when>
+                <when test="subject == '高等数学Ⅱ'">sg.`高等数学Ⅱ` AS grade</when>
+                <when test="subject == '线性代数B'">sg.`线性代数B` AS grade</when>
+                <when test="subject == '概率论与数理统计'">sg.`概率论与数理统计` AS grade</when>
+                <when test="subject == '离散数学'">sg.`离散数学` AS grade</when>
+                <when test="subject == '大学物理BⅠ'">sg.`大学物理BⅠ` AS grade</when>
+                <when test="subject == '大学物理BⅡ'">sg.`大学物理BⅡ` AS grade</when>
+                <when test="subject == '大学物理实验Ⅰ'">sg.`大学物理实验Ⅰ` AS grade</when>
+                <when test="subject == '大学物理实验Ⅱ'">sg.`大学物理实验Ⅱ` AS grade</when>
+                <when test="subject == '高级语言程序设计'">sg.`高级语言程序设计` AS grade</when>
+                <when test="subject == '面向对象程序设计'">sg.`面向对象程序设计` AS grade</when>
+                <when test="subject == '数字电子技术B'">sg.`数字电子技术B` AS grade</when>
+                <when test="subject == '数字电子技术实验'">sg.`数字电子技术实验` AS grade</when>
+                <when test="subject == '数据结构A'">sg.`数据结构A` AS grade</when>
+                <when test="subject == '数据结构实验'">sg.`数据结构实验` AS grade</when>
+                <when test="subject == '计算机组成原理B'">sg.`计算机组成原理B` AS grade</when>
+                <when test="subject == '计算机组成实验'">sg.`计算机组成实验` AS grade</when>
+                <when test="subject == '算法分析与设计B'">sg.`算法分析与设计B` AS grade</when>
+                <when test="subject == '算法分析与设计实验'">sg.`算法分析与设计实验` AS grade</when>
+                <when test="subject == '数据库原理'">sg.`数据库原理` AS grade</when>
+                <when test="subject == '数据库原理实验'">sg.`数据库原理实验` AS grade</when>
+                <when test="subject == '操作系统'">sg.`操作系统` AS grade</when>
+                <when test="subject == '操作系统实验'">sg.`操作系统实验` AS grade</when>
+                <when test="subject == '软件工程'">sg.`软件工程` AS grade</when>
+                <when test="subject == '计算机网络'">sg.`计算机网络` AS grade</when>
+                <when test="subject == '计算机网络工程实验'">sg.`计算机网络工程实验` AS grade</when>
+                <when test="subject == '软件系统分析与设计'">sg.`软件系统分析与设计` AS grade</when>
+                <when test="subject == '编译原理'">sg.`编译原理` AS grade</when>
+                <when test="subject == '人机交互技术'">sg.`人机交互技术` AS grade</when>
+                <when test="subject == '人机交互技术实验'">sg.`人机交互技术实验` AS grade</when>
+                <when test="subject == '新技术讲座'">sg.`新技术讲座` AS grade</when>
+                <when test="subject == '软件项目管理'">sg.`软件项目管理` AS grade</when>
+                <when test="subject == '计算机图形学'">sg.`计算机图形学` AS grade</when>
+                <when test="subject == '计算机图形学实验'">sg.`计算机图形学实验` AS grade</when>
+                <when test="subject == '软件质量保证与测试'">sg.`软件质量保证与测试` AS grade</when>
+                <when test="subject == '软件综合课程设计'">sg.`软件综合课程设计` AS grade</when>
+                <when test="subject == 'Java开发技术'">sg.`Java开发技术` AS grade</when>
+                <when test="subject == 'Linux内核分析'">sg.`Linux内核分析` AS grade</when>
+                <when test="subject == '软件设计模式'">sg.`软件设计模式` AS grade</when>
+                <when test="subject == '软件设计模式实验'">sg.`软件设计模式实验` AS grade</when>
+                <when test="subject == '数据挖掘'">sg.`数据挖掘` AS grade</when>
+                <when test="subject == '人工智能'">sg.`人工智能` AS grade</when>
+                <when test="subject == '云计算与并行技术'">sg.`云计算与并行技术` AS grade</when>
+                <when test="subject == '幸福心理学'">sg.`幸福心理学` AS grade</when>
+                <when test="subject == '信息检索'">sg.`信息检索` AS grade</when>
+                <otherwise>NULL AS grade</otherwise>
+            </choose>
+        FROM student_grades sg
+        LEFT JOIN sys_user u ON sg.id = u.id
+        WHERE u.user_type = 3
+        ORDER BY sg.id
+    </select>
+
+</mapper>
